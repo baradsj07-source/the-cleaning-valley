@@ -1,0 +1,3100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<meta name="theme-color" content="#0B2D5B">
+<meta name="description" content="The Cleaning Valley provides professional cleaning services for homes, rentals, landlords and businesses across London and surrounding areas.">
+<title>The Cleaning Valley | Professional Cleaning Services</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --navy:#0B2D5B;
+  --navy2:#082447;
+  --green:#2F8F76;
+  --green2:#3FA98D;
+  --greenLight:#E8F5F0;
+  --ink:#142033;
+  --muted:#667085;
+  --light:#F5F8FC;
+  --white:#fff;
+  --border:#E4E9F0;
+  --shadow:0 18px 55px rgba(11,45,91,.12);
+  --radius:20px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:"Plus Jakarta Sans",Arial,sans-serif;
+  color:var(--ink);
+  line-height:1.6;
+  overflow-x:hidden;
+  background:#fff
+}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+button,input,select,textarea{font:inherit}
+input,select,textarea{font-size:16px}
+button{cursor:pointer}
+.container{width:min(1160px,calc(100% - 32px));margin:auto}
+
+.topbar{
+  background:var(--navy);
+  color:#fff;
+  font-size:13px;
+  padding:9px 0
+}
+.topbar-inner{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px
+}
+.topbar a{font-weight:800}
+
+.header{
+  position:sticky;
+  top:0;
+  z-index:50;
+  background:rgba(255,255,255,.97);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border)
+}
+.nav{
+  min-height:76px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px
+}
+.logo{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  font-weight:800;
+  color:var(--navy);
+  font-size:20px;
+  white-space:nowrap
+}
+.logo-mark{
+  width:39px;
+  height:39px;
+  border-radius:12px;
+  background:var(--green);
+  display:grid;
+  place-items:center;
+  color:#fff;
+  font-weight:800
+}
+.nav-links{
+  display:flex;
+  gap:25px;
+  align-items:center
+}
+.nav-links a{
+  font-size:14px;
+  font-weight:700;
+  color:#344054
+}
+.nav-links a:hover{color:var(--green)}
+.nav-actions{display:flex;gap:10px;align-items:center}
+
+.btn{
+  border:0;
+  border-radius:12px;
+  padding:13px 19px;
+  font-weight:800;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  transition:.2s ease;
+  min-height:46px
+}
+.btn-primary{
+  background:var(--green);
+  color:#fff;
+  box-shadow:0 10px 24px rgba(47,143,118,.20)
+}
+.btn-primary:hover{background:#267A65;transform:translateY(-1px)}
+.btn-dark{background:var(--navy);color:#fff}
+.btn-dark:hover{background:var(--navy2)}
+.btn-outline{
+  background:#fff;
+  color:var(--navy);
+  border:1px solid var(--border)
+}
+.btn-outline:hover{
+  border-color:var(--green);
+  color:var(--green)
+}
+.btn-light{background:#fff;color:var(--navy)}
+.btn.full{width:100%}
+
+.hero{
+  background:
+    radial-gradient(circle at 8% 15%,rgba(47,143,118,.10),transparent 28%),
+    linear-gradient(135deg,#F8FBFF 0%,#EEF5FC 100%);
+  padding:72px 0 55px
+}
+.hero-grid{
+  display:grid;
+  grid-template-columns:1.03fr .97fr;
+  gap:55px;
+  align-items:center
+}
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 12px;
+  border-radius:999px;
+  background:var(--greenLight);
+  color:#246D59;
+  font-weight:800;
+  font-size:12px;
+  margin-bottom:16px
+}
+.eyebrow-dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:var(--green)
+}
+h1{
+  font-size:clamp(39px,5.2vw,66px);
+  line-height:1.04;
+  letter-spacing:-2.8px;
+  margin:0 0 20px;
+  color:var(--navy)
+}
+.hero h1 span{color:var(--green)}
+.hero-copy{
+  font-size:18px;
+  color:#596579;
+  max-width:650px;
+  margin:0 0 28px
+}
+.hero-buttons{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap
+}
+.hero-points{
+  display:flex;
+  gap:17px;
+  flex-wrap:wrap;
+  margin-top:22px;
+  color:#465267;
+  font-size:13px;
+  font-weight:700
+}
+.hero-point{
+  display:flex;
+  align-items:center;
+  gap:7px
+}
+.check{
+  width:20px;
+  height:20px;
+  border-radius:50%;
+  background:#DFF5E9;
+  color:var(--green);
+  display:grid;
+  place-items:center;
+  font-size:12px;
+  font-weight:900
+}
+.hero-photo{
+  border-radius:28px;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+  position:relative;
+  min-height:470px;
+  background:#dfe8f3
+}
+.hero-photo img{
+  width:100%;
+  height:100%;
+  min-height:470px;
+  object-fit:cover
+}
+.hero-card{
+  position:absolute;
+  left:20px;
+  bottom:20px;
+  background:#fff;
+  border-radius:17px;
+  padding:16px 18px;
+  box-shadow:0 12px 35px rgba(0,0,0,.14);
+  max-width:300px
+}
+.hero-card strong{
+  display:block;
+  color:var(--navy);
+  font-size:14px
+}
+.hero-card span{
+  font-size:12px;
+  color:var(--muted)
+}
+
+.trust{
+  padding:20px 0;
+  background:#fff;
+  border-bottom:1px solid var(--border)
+}
+.trust-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:10px
+}
+.trust-item{
+  text-align:center;
+  padding:13px 8px;
+  border-right:1px solid var(--border);
+  font-size:12px;
+  font-weight:800;
+  color:#475467
+}
+.trust-item:last-child{border:0}
+.trust-item b{
+  display:block;
+  color:var(--navy);
+  font-size:13px;
+  margin-bottom:2px
+}
+
+section{padding:78px 0}
+.section-head{
+  text-align:center;
+  max-width:760px;
+  margin:0 auto 40px
+}
+.section-kicker{
+  color:var(--green);
+  text-transform:uppercase;
+  letter-spacing:1.5px;
+  font-size:11px;
+  font-weight:900;
+  margin-bottom:9px
+}
+h2{
+  margin:0 0 13px;
+  color:var(--navy);
+  font-size:clamp(30px,4vw,45px);
+  line-height:1.1;
+  letter-spacing:-1.5px
+}
+.section-head p{
+  margin:0;
+  color:var(--muted)
+}
+
+.services-section{background:#fff}
+.service-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:17px
+}
+.service-card{
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:23px;
+  background:#fff;
+  box-shadow:0 8px 28px rgba(11,45,91,.05);
+  transition:.2s ease;
+  display:flex;
+  flex-direction:column
+}
+.service-card:hover{
+  transform:translateY(-3px);
+  box-shadow:var(--shadow)
+}
+.service-icon{
+  width:46px;
+  height:46px;
+  border-radius:14px;
+  background:var(--greenLight);
+  color:var(--green);
+  display:grid;
+  place-items:center;
+  font-size:20px;
+  font-weight:900;
+  margin-bottom:16px
+}
+.service-card h3{
+  margin:0 0 8px;
+  color:var(--navy);
+  font-size:17px
+}
+.service-card p{
+  margin:0;
+  color:var(--muted);
+  font-size:13px;
+  flex:1
+}
+.service-link{
+  margin-top:17px;
+  color:var(--green);
+  font-size:12px;
+  font-weight:900
+}
+
+.small-services{
+  margin-top:45px;
+  padding:30px;
+  border-radius:24px;
+  background:#F7F9FC;
+  border:1px solid var(--border)
+}
+.small-services-head{
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  align-items:end;
+  margin-bottom:20px
+}
+.small-services-head h3{
+  margin:0;
+  color:var(--navy);
+  font-size:24px
+}
+.small-services-head p{
+  margin:4px 0 0;
+  color:var(--muted);
+  font-size:13px
+}
+.small-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:13px
+}
+.small-card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:17px;
+  cursor:pointer;
+  transition:.2s
+}
+.small-card:hover{
+  border-color:var(--green);
+  transform:translateY(-2px)
+}
+.small-card strong{
+  display:block;
+  color:var(--navy);
+  font-size:14px
+}
+.small-card span{
+  display:block;
+  color:var(--muted);
+  font-size:11px;
+  margin-top:4px
+}
+.small-card b{
+  display:block;
+  color:var(--green);
+  font-size:13px;
+  margin-top:11px
+}
+
+.carpet-showcase{
+  background:#fff;
+  padding:70px 0
+}
+.carpet-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:48px;
+  align-items:center
+}
+.carpet-image{
+  min-height:390px;
+  border-radius:26px;
+  overflow:hidden;
+  position:relative;
+  box-shadow:var(--shadow);
+  background:#dfeee9
+}
+.carpet-image img{
+  width:100%;
+  height:100%;
+  min-height:390px;
+  object-fit:cover
+}
+.carpet-badge{
+  position:absolute;
+  left:20px;
+  bottom:20px;
+  background:#fff;
+  border-radius:16px;
+  padding:14px 17px;
+  box-shadow:0 12px 30px rgba(7,31,62,.15)
+}
+.carpet-badge strong{
+  display:block;
+  color:var(--navy);
+  font-size:14px
+}
+.carpet-badge span{
+  display:block;
+  color:var(--muted);
+  font-size:11px;
+  margin-top:2px
+}
+.carpet-copy h2{max-width:520px}
+.carpet-copy p{
+  color:var(--muted);
+  max-width:580px;
+  margin:0 0 22px
+}
+.carpet-points{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  margin-bottom:24px
+}
+.carpet-points span{
+  background:#EEF8F4;
+  color:#246D59;
+  border:1px solid #D5EEE6;
+  padding:8px 11px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:800
+}
+
+.simple-section{
+  background:#F7FAFC
+}
+.simple-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:50px;
+  align-items:center
+}
+.simple-copy h2{max-width:600px}
+.simple-copy>p{
+  color:var(--muted);
+  max-width:620px
+}
+.feature-list{
+  display:grid;
+  gap:16px;
+  margin-top:25px
+}
+.feature{
+  display:flex;
+  gap:13px;
+  align-items:flex-start
+}
+.feature-icon{
+  flex:0 0 31px;
+  width:31px;
+  height:31px;
+  border-radius:50%;
+  background:var(--greenLight);
+  color:var(--green);
+  display:grid;
+  place-items:center;
+  font-weight:900;
+  font-size:13px
+}
+.feature h4{
+  margin:0 0 3px;
+  color:var(--navy);
+  font-size:15px
+}
+.feature p{
+  margin:0;
+  color:var(--muted);
+  font-size:12px
+}
+.simple-card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:25px;
+  padding:30px;
+  box-shadow:var(--shadow)
+}
+.simple-card .mini-label{
+  color:var(--green);
+  font-size:11px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:1.2px
+}
+.simple-card h3{
+  color:var(--navy);
+  font-size:26px;
+  line-height:1.2;
+  margin:10px 0 10px
+}
+.simple-card p{
+  color:var(--muted);
+  margin:0 0 20px
+}
+
+.calculator-section{
+  background:#fff
+}
+.calculator-wrap{
+  display:grid;
+  grid-template-columns:1fr .72fr;
+  gap:25px;
+  align-items:start
+}
+.calculator,.summary{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:24px;
+  box-shadow:var(--shadow)
+}
+.calculator{padding:28px}
+.summary{
+  padding:26px;
+  background:var(--navy);
+  color:#fff;
+  position:sticky;
+  top:100px
+}
+.summary h3{
+  margin:0 0 18px;
+  font-size:20px
+}
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:16px
+}
+.field{margin-bottom:16px}
+.field label{
+  display:block;
+  color:#344054;
+  font-size:12px;
+  font-weight:800;
+  margin-bottom:7px
+}
+.field select,
+.field input,
+.field textarea{
+  width:100%;
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:13px 14px;
+  background:#fff;
+  color:var(--ink);
+  outline:none
+}
+.field select:focus,
+.field input:focus,
+.field textarea:focus{
+  border-color:var(--green);
+  box-shadow:0 0 0 3px rgba(47,143,118,.10)
+}
+.field textarea{
+  min-height:100px;
+  resize:vertical
+}
+.extra-title{
+  margin:8px 0 10px;
+  color:var(--navy);
+  font-size:14px;
+  font-weight:900
+}
+.check-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px
+}
+.check-option{
+  border:1px solid var(--border);
+  border-radius:13px;
+  padding:12px;
+  display:flex;
+  gap:9px;
+  align-items:flex-start;
+  background:#fff
+}
+.check-option:hover{border-color:var(--green)}
+.check-option input{
+  margin-top:3px;
+  accent-color:var(--green)
+}
+.check-option span{
+  font-size:12px;
+  color:#475467;
+  line-height:1.4
+}
+.check-option strong{
+  display:block;
+  color:var(--navy);
+  font-size:12px
+}
+.carpet-options{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:9px;
+  margin-bottom:15px
+}
+.radio-card{
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:11px;
+  cursor:pointer;
+  display:block
+}
+.radio-card input{
+  accent-color:var(--green);
+  margin-right:5px
+}
+.radio-card strong{
+  display:block;
+  color:var(--navy);
+  font-size:12px
+}
+.radio-card span{
+  color:var(--green);
+  font-size:11px;
+  font-weight:800
+}
+.estimate-total{
+  font-size:46px;
+  line-height:1;
+  font-weight:800;
+  margin:10px 0 7px
+}
+.estimate-range{
+  color:#BBD0E9;
+  font-size:12px;
+  margin-bottom:20px
+}
+.summary-list{
+  list-style:none;
+  padding:0;
+  margin:0 0 20px;
+  border-top:1px solid rgba(255,255,255,.13)
+}
+.summary-list li{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  padding:9px 0;
+  border-bottom:1px solid rgba(255,255,255,.13);
+  font-size:11px
+}
+.summary-list li span:last-child{
+  font-weight:800;
+  color:#DDF4EC
+}
+.discount-badge{
+  display:none;
+  background:#DFF5E9;
+  color:#216C57;
+  border-radius:999px;
+  padding:7px 10px;
+  font-size:10px;
+  font-weight:900;
+  margin-bottom:15px
+}
+.calculator-note{
+  font-size:11px;
+  color:var(--muted);
+  margin-top:13px
+}
+
+.steps-section{
+  background:var(--light)
+}
+.steps{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+  position:relative
+}
+.step{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:25px;
+  position:relative
+}
+.step-number{
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  background:var(--navy);
+  color:#fff;
+  display:grid;
+  place-items:center;
+  font-size:13px;
+  font-weight:900;
+  margin-bottom:17px
+}
+.step h3{
+  color:var(--navy);
+  margin:0 0 7px;
+  font-size:16px
+}
+.step p{
+  margin:0;
+  color:var(--muted);
+  font-size:12px
+}
+.step-line{
+  position:absolute;
+  top:44px;
+  left:0;
+  right:0;
+  height:1px;
+  background:#DDE5EF;
+  z-index:0
+}
+.step{z-index:1}
+
+.areas{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:25px
+}
+.area-box{
+  border-radius:23px;
+  padding:30px;
+  background:var(--navy);
+  color:#fff
+}
+.area-box.light{
+  background:#F7FAFC;
+  color:var(--ink);
+  border:1px solid var(--border)
+}
+.area-box h3{
+  margin:0 0 10px;
+  font-size:23px
+}
+.area-box p{
+  margin:0 0 17px;
+  color:#C7D5E5;
+  font-size:13px
+}
+.area-box.light p{color:var(--muted)}
+.area-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px
+}
+.area-tags span{
+  padding:7px 10px;
+  border-radius:999px;
+  background:rgba(255,255,255,.1);
+  font-size:11px;
+  font-weight:800
+}
+.area-box.light .area-tags span{
+  background:#fff;
+  color:var(--navy);
+  border:1px solid var(--border)
+}
+
+.faq-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:13px
+}
+details{
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:17px 18px;
+  background:#fff
+}
+summary{
+  cursor:pointer;
+  color:var(--navy);
+  font-size:13px;
+  font-weight:800
+}
+details p{
+  color:var(--muted);
+  font-size:12px;
+  margin:11px 0 0
+}
+
+.cta{
+  background:linear-gradient(135deg,var(--navy),#103B70);
+  color:#fff;
+  border-radius:28px;
+  padding:45px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:30px
+}
+.cta h2{
+  color:#fff;
+  margin-bottom:8px
+}
+.cta p{
+  margin:0;
+  color:#C8D6E7;
+  max-width:650px
+}
+.cta-actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap
+}
+
+.footer{
+  background:#071C36;
+  color:#B7C7D9;
+  padding:45px 0 25px
+}
+.footer-grid{
+  display:grid;
+  grid-template-columns:1.4fr .8fr .8fr;
+  gap:35px
+}
+.footer h3,.footer h4{
+  color:#fff;
+  margin-top:0
+}
+.footer p{
+  font-size:12px;
+  line-height:1.8
+}
+.footer-links{
+  display:grid;
+  gap:9px;
+  font-size:12px
+}
+.footer-links a:hover{color:#fff}
+.footer-bottom{
+  margin-top:30px;
+  padding-top:20px;
+  border-top:1px solid rgba(255,255,255,.1);
+  font-size:11px;
+  display:flex;
+  justify-content:space-between;
+  gap:15px
+}
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(3,17,34,.68);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:100;
+  padding:18px
+}
+.modal.open{display:flex}
+.modal-box{
+  background:#fff;
+  width:min(760px,100%);
+  max-height:92vh;
+  overflow:auto;
+  border-radius:25px;
+  box-shadow:0 30px 80px rgba(0,0,0,.25)
+}
+.modal-head{
+  padding:24px 27px;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px
+}
+.modal-head h3{
+  margin:0;
+  color:var(--navy);
+  font-size:21px
+}
+.close{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  border:1px solid var(--border);
+  background:#fff;
+  color:var(--navy);
+  font-size:20px
+}
+.modal-content{padding:27px}
+.modal-sub{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:0
+}
+.booking-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px
+}
+.booking-grid .full-field{grid-column:1/-1}
+.payment-box{
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:15px
+}
+.payment-box label{
+  display:block;
+  color:var(--navy);
+  font-size:12px;
+  font-weight:800;
+  margin-bottom:7px
+}
+.form-actions{
+  display:flex;
+  gap:10px;
+  justify-content:flex-end;
+  flex-wrap:wrap;
+  margin-top:17px
+}
+.file-note{
+  color:var(--muted);
+  font-size:10px;
+  margin-top:6px
+}
+.photo-preview{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:10px
+}
+.photo-preview img{
+  width:65px;
+  height:65px;
+  border-radius:9px;
+  object-fit:cover;
+  border:1px solid var(--border)
+}
+.notice{
+  display:none;
+  border-radius:12px;
+  padding:10px 12px;
+  font-size:11px;
+  margin-bottom:14px
+}
+.notice.show{display:block}
+.notice.success{
+  background:#EAF7F1;
+  color:#216C57
+}
+.notice.error{
+  background:#FFF0F0;
+  color:#A52C2C
+}
+.booking-success{text-align:center;padding:20px 5px 8px}
+.success-icon{
+  width:60px;
+  height:60px;
+  margin:0 auto 15px;
+  border-radius:50%;
+  background:#E7F6EE;
+  color:var(--green);
+  display:grid;
+  place-items:center;
+  font-size:28px;
+  font-weight:900
+}
+.booking-ref{
+  display:inline-block;
+  padding:12px 17px;
+  border-radius:12px;
+  background:var(--navy);
+  color:#fff;
+  font-weight:900;
+  letter-spacing:1px;
+  margin:10px 0 15px
+}
+
+@media(max-width:980px){
+  .nav-links{display:none}
+  .hero-grid,
+  .carpet-grid,
+  .simple-grid,
+  .calculator-wrap{
+    grid-template-columns:1fr
+  }
+  .hero{padding-top:50px}
+  .hero-photo{
+    min-height:390px
+  }
+  .hero-photo img{min-height:390px}
+  .trust-grid{grid-template-columns:repeat(3,1fr)}
+  .trust-item:nth-child(3){border-right:0}
+  .service-grid{grid-template-columns:repeat(2,1fr)}
+  .small-grid{grid-template-columns:repeat(2,1fr)}
+  .summary{position:static}
+  .steps{grid-template-columns:repeat(2,1fr)}
+  .step-line{display:none}
+  .areas{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+
+@media(max-width:650px){
+  .container{width:min(100% - 22px,1160px)}
+  .topbar-inner{
+    justify-content:center;
+    text-align:center
+  }
+  .topbar-inner>span{display:none}
+  .nav{min-height:67px}
+  .logo{font-size:17px}
+  .logo-mark{
+    width:35px;
+    height:35px
+  }
+  .nav-actions .btn-outline{display:none}
+  .nav-actions .btn{padding:10px 13px}
+  .hero{
+    padding:42px 0 35px
+  }
+  h1{
+    font-size:40px;
+    letter-spacing:-2px
+  }
+  .hero-copy{font-size:15px}
+  .hero-photo,
+  .hero-photo img{
+    min-height:330px
+  }
+  section{padding:58px 0}
+  .trust-grid{grid-template-columns:repeat(2,1fr)}
+  .trust-item{
+    border-right:0;
+    border-bottom:1px solid var(--border)
+  }
+  .service-grid{grid-template-columns:1fr}
+  .small-services{padding:20px}
+  .small-services-head{
+    display:block
+  }
+  .small-grid{grid-template-columns:1fr 1fr}
+  .carpet-grid{gap:28px}
+  .carpet-image,
+  .carpet-image img{
+    min-height:300px
+  }
+  .form-grid,
+  .booking-grid,
+  .check-grid{
+    grid-template-columns:1fr
+  }
+  .carpet-options{
+    grid-template-columns:1fr 1fr
+  }
+  .calculator{padding:20px}
+  .summary{padding:21px}
+  .estimate-total{font-size:40px}
+  .steps{grid-template-columns:1fr}
+  .areas{grid-template-columns:1fr}
+  .faq-grid{grid-template-columns:1fr}
+  .cta{
+    padding:28px 22px;
+    display:block
+  }
+  .cta-actions{margin-top:20px}
+  .footer-grid{grid-template-columns:1fr}
+  .footer-bottom{
+    display:block
+  }
+  .footer-bottom span{
+    display:block;
+    margin-top:6px
+  }
+  .modal{
+    padding:8px
+  }
+  .modal-box{
+    max-height:96vh;
+    border-radius:20px
+  }
+  .modal-content{padding:20px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+  <div class="container topbar-inner">
+    <span>Professional cleaning for homes, rentals, landlords & businesses</span>
+    <a href="tel:07767905631">Call 07767 905631</a>
+  </div>
+</div>
+
+<header class="header">
+  <div class="container nav">
+    <a href="#" class="logo">
+      <span class="logo-mark">CV</span>
+      The Cleaning Valley
+    </a>
+
+    <nav class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#estimate">Pricing</a>
+      <a href="#how-it-works">How It Works</a>
+      <a href="#areas">Areas</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+    <div class="nav-actions">
+      <a class="btn btn-outline" href="mailto:info@thecleaningvalley.co.uk">Email Us</a>
+      <button class="btn btn-primary" onclick="openBooking()">Book a Clean</button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section class="hero">
+  <div class="container hero-grid">
+
+    <div>
+      <div class="eyebrow">
+        <span class="eyebrow-dot"></span>
+        Professional cleaning made simple
+      </div>
+
+      <h1>
+        Imagine walking into a home that feels <span>brand new.</span>
+      </h1>
+
+      <p class="hero-copy">
+        From one-off home cleans to end of tenancy, deep cleaning and commercial work,
+        The Cleaning Valley makes it easier to understand what you need, what it may cost
+        and how to book it.
+      </p>
+
+      <div class="hero-buttons">
+        <button class="btn btn-primary" onclick="scrollToEstimate()">Get an Estimate</button>
+        <button class="btn btn-outline" onclick="openBooking()">Book a Cleaning</button>
+      </div>
+
+      <div class="hero-points">
+        <div class="hero-point"><span class="check">✓</span> Clear estimates</div>
+        <div class="hero-point"><span class="check">✓</span> Flexible payment</div>
+        <div class="hero-point"><span class="check">✓</span> 48-hour service guarantee</div>
+      </div>
+    </div>
+
+    <div class="hero-photo">
+      <img
+        src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1400&q=90"
+        alt="Professional cleaner providing a high quality cleaning service"
+      >
+
+      <div class="hero-card">
+        <strong>Cleaning that fits around your needs.</strong>
+        <span>Homes • Rentals • Landlords • Businesses</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="trust">
+  <div class="container trust-grid">
+    <div class="trust-item">
+      <b>Clear Estimates</b>
+      Understand the likely cost
+    </div>
+    <div class="trust-item">
+      <b>Flexible Service</b>
+      Choose what you actually need
+    </div>
+    <div class="trust-item">
+      <b>Homes & Business</b>
+      One-off or ongoing cleaning
+    </div>
+    <div class="trust-item">
+      <b>48-Hour Guarantee</b>
+      Service commitment
+    </div>
+    <div class="trust-item">
+      <b>Easy Booking</b>
+      Online or enquiry
+    </div>
+  </div>
+</div>
+
+
+<section id="services" class="services-section">
+  <div class="container">
+
+    <div class="section-head">
+      <div class="section-kicker">Our Services</div>
+      <h2>Cleaning for the jobs that matter.</h2>
+      <p>
+        Choose a full cleaning service or book a smaller job on its own.
+        Everything is designed to stay simple and flexible.
+      </p>
+    </div>
+
+    <div class="service-grid">
+
+      <article class="service-card">
+        <div class="service-icon">⌂</div>
+        <h3>End of Tenancy Cleaning</h3>
+        <p>Detailed cleaning for tenants, landlords and property handovers.</p>
+        <div class="service-link" onclick="openBookingWithService('End of Tenancy Cleaning')">Book this service →</div>
+      </article>
+
+      <article class="service-card">
+        <div class="service-icon">✦</div>
+        <h3>Deep Cleaning</h3>
+        <p>A more thorough clean when your property needs extra attention.</p>
+        <div class="service-link" onclick="openBookingWithService('Deep Cleaning')">Book this service →</div>
+      </article>
+
+      <article class="service-card">
+        <div class="service-icon">✓</div>
+        <h3>Domestic Cleaning</h3>
+        <p>Regular or one-off cleaning for homes and everyday living spaces.</p>
+        <div class="service-link" onclick="openBookingWithService('Domestic Cleaning')">Book this service →</div>
+      </article>
+
+      <article class="service-card">
+        <div class="service-icon">↗</div>
+        <h3>Move-In Cleaning</h3>
+        <p>Start fresh in a property before you unpack and settle in.</p>
+        <div class="service-link" onclick="openBookingWithService('Move-In Cleaning')">Book this service →</div>
+      </article>
+
+      <article class="service-card">
+        <div class="service-icon">→</div>
+        <h3>Move-Out Cleaning</h3>
+        <p>Prepare your property properly before handing it over.</p>
+        <div class="service-link" onclick="openBookingWithService('Move-Out Cleaning')">Book this service →</div>
+      </article>
+
+      <article class="service-card">
+        <div class="service-icon">★</div>
+        <h3>Airbnb & Short-Let</h3>
+        <p>Cleaning support for short-let properties between guest stays.</p>
+        <div class="service-link" onclick="openBookingWithService('Airbnb & Short-Let Cleaning')">Book this service →</div>
+      </article>
+
+      <article class="service-card">
+        <div class="service-icon">▦</div>
+        <h3>HMO & Landlord Cleaning</h3>
+        <p>Flexible cleaning support for landlords, HMOs and rental properties.</p>
+        <div class="service-link" onclick="openBookingWithService('HMO & Landlord Cleaning')">Book this service →</div>
+      </article>
+
+      <article class="service-card">
+        <div class="service-icon">▤</div>
+        <h3>Commercial Cleaning</h3>
+        <p>Professional cleaning for offices, workplaces and commercial spaces.</p>
+        <div class="service-link" onclick="openBookingWithService('Commercial Cleaning')">Book this service →</div>
+      </article>
+
+    </div>
+
+
+    <div class="small-services">
+
+      <div class="small-services-head">
+        <div>
+          <h3>Small Jobs & Add-ons</h3>
+          <p>Only need one thing cleaned? You can book that too.</p>
+        </div>
+        <span class="section-kicker">Flexible cleaning</span>
+      </div>
+
+      <div class="small-grid">
+
+        <div class="small-card" onclick="openBookingWithService('Carpet Cleaning')">
+          <strong>Carpet Cleaning</strong>
+          <span>1 room, 2 rooms, 3 rooms or more</span>
+          <b>From £35</b>
+        </div>
+
+        <div class="small-card" onclick="openBookingWithService('Sofa Cleaning')">
+          <strong>Sofa Cleaning</strong>
+          <span>Freshen up sofas and upholstered seating</span>
+          <b>From £30</b>
+        </div>
+
+        <div class="small-card" onclick="openBookingWithService('Oven Cleaning')">
+          <strong>Oven Cleaning</strong>
+          <span>Detailed oven cleaning</span>
+          <b>From £35</b>
+        </div>
+
+        <div class="small-card" onclick="openBookingWithService('Fridge-Freezer Cleaning')">
+          <strong>Fridge-Freezer Cleaning</strong>
+          <span>Inside cleaning and refresh</span>
+          <b>From £25</b>
+        </div>
+
+        <div class="small-card" onclick="openBookingWithService('Cupboard/Cabinet Cleaning')">
+          <strong>Cupboards & Cabinets</strong>
+          <span>Internal cupboard and cabinet cleaning</span>
+          <b>From £25</b>
+        </div>
+
+        <div class="small-card" onclick="openBookingWithService('Internal Window Cleaning')">
+          <strong>Internal Windows</strong>
+          <span>Internal window cleaning</span>
+          <b>From £30</b>
+        </div>
+
+        <div class="small-card" onclick="openBookingWithService('External Window Cleaning')">
+          <strong>External Windows</strong>
+          <span>Safely reachable only</span>
+          <b>From £40</b>
+        </div>
+
+        <div class="small-card" onclick="openBookingWithService('Custom / Small Cleaning Job')">
+          <strong>Something Else?</strong>
+          <span>Tell us what you need</span>
+          <b>Ask for a quote</b>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<section class="carpet-showcase">
+  <div class="container carpet-grid">
+
+    <div class="carpet-image">
+      <img
+        src="https://images.unsplash.com/photo-1558317374-067fb5f30001?auto=format&fit=crop&w=1400&q=90"
+        alt="Professional carpet cleaning service"
+      >
+      <div class="carpet-badge">
+        <strong>Carpet Cleaning</strong>
+        <span>Deep clean • Fresh finish • Individual rooms available</span>
+      </div>
+    </div>
+
+    <div class="carpet-copy">
+      <div class="section-kicker">A cleaner feel under your feet</div>
+
+      <h2>Give tired carpets a proper refresh.</h2>
+
+      <p>
+        From one room to multiple rooms, our carpet cleaning option lets you
+        choose exactly how much work you need. No need to book a full-property
+        clean just to bring one carpet back to life.
+      </p>
+
+      <div class="carpet-points">
+        <span>1 Room</span>
+        <span>2 Rooms</span>
+        <span>3 Rooms</span>
+        <span>4+ Rooms</span>
+        <span>Flexible Booking</span>
+      </div>
+
+      <button class="btn btn-primary" onclick="openBookingWithService('Carpet Cleaning')">
+        Book Carpet Cleaning
+      </button>
+    </div>
+
+  </div>
+</section>
+
+
+<section class="simple-section">
+  <div class="container simple-grid">
+
+    <div class="simple-copy">
+      <div class="section-kicker">Our approach</div>
+
+      <h2>Cleaning that feels simple from the start.</h2>
+
+      <p>
+        No confusing process. Tell us what you need, understand the likely
+        cost and choose how you want to move forward.
+      </p>
+
+      <div class="feature-list">
+
+        <div class="feature">
+          <div class="feature-icon">✓</div>
+          <div>
+            <h4>Pricing built around the job</h4>
+            <p>
+              Property size, condition and additional work can all affect the estimate.
+            </p>
+          </div>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon">✓</div>
+          <div>
+            <h4>More work can mean better value</h4>
+            <p>
+              Our estimator can apply bundle savings when multiple services or extras are selected.
+            </p>
+          </div>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon">✓</div>
+          <div>
+            <h4>Built for homes and businesses</h4>
+            <p>
+              From one-off home cleans to larger commercial requirements.
+            </p>
+          </div>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon">✓</div>
+          <div>
+            <h4>Flexible payment options</h4>
+            <p>
+              Depending on the final booking arrangement, payment can be handled online or after service.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="simple-card">
+      <div class="mini-label">The Cleaning Valley</div>
+      <h3>A cleaner home. A clearer process.</h3>
+      <p>
+        Select your service, tell us about the property and get an approximate
+        price before moving forward.
+      </p>
+
+      <div class="hero-point">
+        <span class="check">✓</span>
+        Professional cleaning options
+      </div>
+
+      <div class="hero-point" style="margin-top:10px">
+        <span class="check">✓</span>
+        Small jobs available separately
+      </div>
+
+      <div class="hero-point" style="margin-top:10px">
+        <span class="check">✓</span>
+        Property photos can be added
+      </div>
+
+      <div class="hero-point" style="margin-top:10px">
+        <span class="check">✓</span>
+        48-hour service guarantee
+      </div>
+
+      <button class="btn btn-primary full" style="margin-top:22px" onclick="openBooking()">
+        Start Your Booking
+      </button>
+    </div>
+
+  </div>
+</section>
+
+
+<section id="estimate" class="calculator-section">
+  <div class="container">
+
+    <div class="section-head">
+      <div class="section-kicker">Estimate Your Cleaning</div>
+      <h2>See the likely cost before you book.</h2>
+      <p>
+        This is an approximate estimate. The final price can be confirmed
+        after understanding the property and exact work required.
+      </p>
+    </div>
+
+    <div class="calculator-wrap">
+
+      <div class="calculator">
+
+        <div class="form-grid">
+
+          <div class="field">
+            <label for="service">Main service</label>
+            <select id="service">
+              <option value="155">End of Tenancy Cleaning — from £155</option>
+              <option value="145">Deep Cleaning — from £145</option>
+              <option value="90">Domestic Cleaning — from £90</option>
+              <option value="150">Move-In Cleaning — from £150</option>
+              <option value="150">Move-Out Cleaning — from £150</option>
+              <option value="95">Airbnb & Short-Let Cleaning — from £95</option>
+              <option value="165">HMO & Landlord Cleaning — from £165</option>
+              <option value="180">Commercial Cleaning — from £180</option>
+              <option value="0">Custom / Small Cleaning Job</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="bedroom">Property size</label>
+            <select id="bedroom">
+              <option value="0">Studio / Small property — £0</option>
+              <option value="35">1 bedroom — +£35</option>
+              <option value="80">2 bedrooms — +£80</option>
+              <option value="125">3 bedrooms — +£125</option>
+              <option value="175">4 bedrooms — +£175</option>
+              <option value="230">5+ bedrooms — +£230</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="bathroom">Bathrooms</label>
+            <select id="bathroom">
+              <option value="0">1 bathroom — £0</option>
+              <option value="25">2 bathrooms — +£25</option>
+              <option value="50">3 bathrooms — +£50</option>
+              <option value="80">4+ bathrooms — +£80</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="condition">Property condition</label>
+            <select id="condition">
+              <option value="0">Light — standard condition</option>
+              <option value="15">Standard — +£15</option>
+              <option value="45">Heavy — +£45</option>
+              <option value="80">Very Heavy — +£80</option>
+            </select>
+          </div>
+
+        </div>
+
+        <div class="extra-title">Carpet Cleaning</div>
+
+        <div class="carpet-options">
+
+          <label class="radio-card">
+            <input type="radio" name="carpet" value="0" data-label="No carpet cleaning" checked>
+            <strong>None</strong>
+            <span>£0</span>
+          </label>
+
+          <label class="radio-card">
+            <input type="radio" name="carpet" value="35" data-label="Carpet Cleaning — 1 room">
+            <strong>1 room</strong>
+            <span>+£35</span>
+          </label>
+
+          <label class="radio-card">
+            <input type="radio" name="carpet" value="65" data-label="Carpet Cleaning — 2 rooms">
+            <strong>2 rooms</strong>
+            <span>+£65</span>
+          </label>
+
+          <label class="radio-card">
+            <input type="radio" name="carpet" value="90" data-label="Carpet Cleaning — 3 rooms">
+            <strong>3 rooms</strong>
+            <span>+£90</span>
+          </label>
+
+        </div>
+
+        <div class="field">
+          <label class="radio-card">
+            <input type="radio" name="carpet" value="115" data-label="Carpet Cleaning — 4+ rooms">
+            <strong>4+ rooms — +£115</strong>
+            <span>Choose this for larger carpet cleaning requirements</span>
+          </label>
+        </div>
+
+        <div class="extra-title">Additional cleaning</div>
+
+        <div class="check-grid">
+
+          <label class="check-option">
+            <input type="checkbox" value="35" data-label="Oven Cleaning">
+            <span><strong>Oven Cleaning</strong> +£35</span>
+          </label>
+
+          <label class="check-option">
+            <input type="checkbox" value="25" data-label="Fridge-Freezer Cleaning">
+            <span><strong>Fridge-Freezer</strong> +£25</span>
+          </label>
+
+          <label class="check-option">
+            <input type="checkbox" value="25" data-label="Cupboards/Cabinets">
+            <span><strong>Cupboards/Cabinets</strong> +£25</span>
+          </label>
+
+          <label class="check-option">
+            <input type="checkbox" value="30" data-label="Internal Window Cleaning">
+            <span><strong>Internal Windows</strong> +£30</span>
+          </label>
+
+          <label class="check-option">
+            <input type="checkbox" value="40" data-label="External Window Cleaning — safely reachable only">
+            <span><strong>External Windows</strong> +£40<br>Safely reachable only</span>
+          </label>
+
+          <label class="check-option">
+            <input type="checkbox" value="30" data-label="Sofa Cleaning">
+            <span><strong>Sofa Cleaning</strong> +£30</span>
+          </label>
+
+        </div>
+
+        <p class="calculator-note">
+          *Prices are starting estimates and can be adjusted later from the pricing configuration.
+          A final quote may depend on property condition, access, size and exact requirements.
+        </p>
+
+      </div>
+
+
+      <aside class="summary">
+
+        <h3>Your Estimate</h3>
+
+        <div id="discountBadge" class="discount-badge">
+          Bundle saving applied
+        </div>
+
+        <div class="estimate-total" id="estimatePrice">£0</div>
+
+        <div class="estimate-range" id="estimateRange">
+          Approximate range: £0–£0
+        </div>
+
+        <ul class="summary-list" id="summaryList"></ul>
+
+        <button class="btn btn-primary full" onclick="bookFromEstimate()">
+          Continue to Booking
+        </button>
+
+        <p style="font-size:10px;color:#BBD0E9;margin:13px 0 0">
+          No advance payment is required simply to request a quote.
+          Payment arrangements can be agreed for the final booking.
+        </p>
+
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+
+<section id="how-it-works" class="steps-section">
+  <div class="container">
+
+    <div class="section-head">
+      <div class="section-kicker">How It Works</div>
+      <h2>From “I need a cleaner” to done.</h2>
+      <p>
+        A simple process without unnecessary back and forth.
+      </p>
+    </div>
+
+    <div class="steps">
+
+      <div class="step-line"></div>
+
+      <div class="step">
+        <div class="step-number">1</div>
+        <h3>I need a cleaner</h3>
+        <p>
+          Choose the type of cleaning or tell us what small job you need.
+        </p>
+      </div>
+
+      <div class="step">
+        <div class="step-number">2</div>
+        <h3>Tell us what you need</h3>
+        <p>
+          Give us the property details, preferred date and any additional requirements.
+        </p>
+      </div>
+
+      <div class="step">
+        <div class="step-number">3</div>
+        <h3>Understand the likely cost</h3>
+        <p>
+          Use the estimator to get an approximate price before moving forward.
+        </p>
+      </div>
+
+      <div class="step">
+        <div class="step-number">4</div>
+        <h3>Choose how to move forward</h3>
+        <p>
+          Submit your request, email us or speak with the team about your booking.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<section id="areas">
+  <div class="container">
+
+    <div class="section-head">
+      <div class="section-kicker">Service Areas</div>
+      <h2>Cleaning across London and surrounding areas.</h2>
+      <p>
+        Our standard service coverage is focused around London and nearby areas.
+        Further travel may be available for selected bookings.
+      </p>
+    </div>
+
+    <div class="areas">
+
+      <div class="area-box">
+        <h3>Regular service area</h3>
+        <p>
+          We primarily serve customers within approximately a 25-mile service
+          radius, subject to availability.
+        </p>
+
+        <div class="area-tags">
+          <span>Wembley</span>
+          <span>North West London</span>
+          <span>West London</span>
+          <span>Central London</span>
+          <span>Surrounding Areas</span>
+        </div>
+      </div>
+
+      <div class="area-box light">
+        <h3>Further locations</h3>
+        <p>
+          Selected bookings up to approximately 100 miles may be considered.
+          Additional travel charges can apply depending on distance and time.
+        </p>
+
+        <div class="area-tags">
+          <span>Further London Areas</span>
+          <span>Villages</span>
+          <span>Outside Standard Radius</span>
+          <span>By Arrangement</span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<section id="faq" style="background:#F7FAFC">
+  <div class="container">
+
+    <div class="section-head">
+      <div class="section-kicker">FAQ</div>
+      <h2>Questions before booking?</h2>
+    </div>
+
+    <div class="faq-grid">
+
+      <details>
+        <summary>Do I have to pay before the cleaning?</summary>
+        <p>
+          Not necessarily. Payment arrangements can be agreed depending on the
+          final booking. Payment after service may be available.
+        </p>
+      </details>
+
+      <details>
+        <summary>Can I book only one small service?</summary>
+        <p>
+          Yes. Carpet Cleaning, Sofa Cleaning, Oven Cleaning, Fridge-Freezer
+          Cleaning, cupboards, internal windows and safely reachable external
+          windows can be requested separately.
+        </p>
+      </details>
+
+      <details>
+        <summary>Can I send photos of the property?</summary>
+        <p>
+          Yes. The booking form allows optional property photos so the cleaning
+          requirements can be understood more clearly.
+        </p>
+      </details>
+
+      <details>
+        <summary>Is the price shown on the estimator final?</summary>
+        <p>
+          No. The estimator gives a likely price range. The final quote can
+          depend on the property's condition, size, access and exact work.
+        </p>
+      </details>
+
+      <details>
+        <summary>Do you clean external windows?</summary>
+        <p>
+          External window cleaning can be requested where the windows are safely
+          reachable. Unsafe or specialist access is not included.
+        </p>
+      </details>
+
+      <details>
+        <summary>How quickly can I get a cleaning service?</summary>
+        <p>
+          Availability depends on the requested date, location and service.
+          The website includes a 48-hour service guarantee statement, subject
+          to the final booking arrangement.
+        </p>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+
+<section>
+  <div class="container">
+
+    <div class="cta">
+
+      <div>
+        <div class="section-kicker" style="color:#7DD2BB">
+          Ready when you are
+        </div>
+
+        <h2>Let’s make the next clean feel easy.</h2>
+
+        <p>
+          Get an estimate, send an enquiry or tell us exactly what you need.
+        </p>
+      </div>
+
+      <div class="cta-actions">
+        <button class="btn btn-primary" onclick="openBooking()">Book a Cleaning</button>
+
+        <a
+          class="btn btn-light"
+          href="mailto:info@thecleaningvalley.co.uk?subject=Cleaning%20Enquiry"
+        >
+          Email Enquiry
+        </a>
+
+        <a class="btn btn-outline" href="tel:07767905631">
+          Call Us
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+
+<footer class="footer">
+
+  <div class="container footer-grid">
+
+    <div>
+      <h3>The Cleaning Valley</h3>
+      <p>
+        Professional cleaning for homes, rentals, landlords and businesses.
+        Simple booking, clear estimates and flexible service options.
+      </p>
+
+      <p>
+        <strong style="color:#fff">Phone:</strong>
+        <a href="tel:07767905631">07767 905631</a><br>
+
+        <strong style="color:#fff">Email:</strong>
+        <a href="mailto:info@thecleaningvalley.co.uk">
+          info@thecleaningvalley.co.uk
+        </a>
+      </p>
+    </div>
+
+    <div>
+      <h4>Services</h4>
+
+      <div class="footer-links">
+        <a href="#services">End of Tenancy</a>
+        <a href="#services">Deep Cleaning</a>
+        <a href="#services">Domestic Cleaning</a>
+        <a href="#services">Move-In / Move-Out</a>
+        <a href="#services">Commercial Cleaning</a>
+        <a href="#services">Carpet Cleaning</a>
+      </div>
+    </div>
+
+    <div>
+      <h4>Quick Links</h4>
+
+      <div class="footer-links">
+        <a href="#estimate">Get an Estimate</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#areas">Service Areas</a>
+        <a href="#faq">FAQ</a>
+        <a href="mailto:info@thecleaningvalley.co.uk">Email Us</a>
+        <a href="tel:07767905631">Call 07767 905631</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="container footer-bottom">
+    <span>© <span id="year"></span> The Cleaning Valley. All rights reserved.</span>
+    <span>Professional cleaning services</span>
+  </div>
+
+</footer>
+
+
+<div class="modal" id="bookingModal" aria-hidden="true">
+
+  <div class="modal-box" role="dialog" aria-modal="true">
+
+    <div class="modal-head">
+      <div>
+        <h3>Request a Cleaning</h3>
+        <div style="font-size:11px;color:#667085">
+          Tell us what you need and we’ll use the details to understand your request.
+        </div>
+      </div>
+
+      <button class="close" onclick="closeBooking()" aria-label="Close">×</button>
+    </div>
+
+    <div class="modal-content" id="bookingContent">
+
+      <div class="notice" id="formNotice"></div>
+
+      <p class="modal-sub">
+        Fields marked with * are required. Property photos are optional.
+      </p>
+
+      <form onsubmit="submitBooking(event)">
+
+        <div class="booking-grid">
+
+          <div class="field">
+            <label for="customerName">Name *</label>
+            <input id="customerName" required placeholder="Your name">
+          </div>
+
+          <div class="field">
+            <label for="customerPhone">Phone *</label>
+            <input id="customerPhone" type="tel" required placeholder="07...">
+          </div>
+
+          <div class="field">
+            <label for="customerEmail">Email *</label>
+            <input id="customerEmail" type="email" required placeholder="you@example.com">
+          </div>
+
+          <div class="field">
+            <label for="postcode">Postcode *</label>
+            <input id="postcode" required placeholder="e.g. HA0 1AA">
+          </div>
+
+          <div class="field">
+            <label for="bookingService">Service *</label>
+
+            <select id="bookingService" required>
+
+              <option value="">Choose a service</option>
+
+              <option value="End of Tenancy Cleaning">
+                End of Tenancy Cleaning
+              </option>
+
+              <option value="Deep Cleaning">
+                Deep Cleaning
+              </option>
+
+              <option value="Domestic Cleaning">
+                Domestic Cleaning
+              </option>
+
+              <option value="Move-In Cleaning">
+                Move-In Cleaning
+              </option>
+
+              <option value="Move-Out Cleaning">
+                Move-Out Cleaning
+              </option>
+
+              <option value="Airbnb & Short-Let Cleaning">
+                Airbnb & Short-Let Cleaning
+              </option>
+
+              <option value="HMO & Landlord Cleaning">
+                HMO & Landlord Cleaning
+              </option>
+
+              <option value="Commercial Cleaning">
+                Commercial Cleaning
+              </option>
+
+              <option value="Carpet Cleaning">
+                Carpet Cleaning
+              </option>
+
+              <option value="Sofa Cleaning">
+                Sofa Cleaning
+              </option>
+
+              <option value="Oven Cleaning">
+                Oven Cleaning
+              </option>
+
+              <option value="Fridge-Freezer Cleaning">
+                Fridge-Freezer Cleaning
+              </option>
+
+              <option value="Cupboard/Cabinet Cleaning">
+                Cupboard/Cabinet Cleaning
+              </option>
+
+              <option value="Internal Window Cleaning">
+                Internal Window Cleaning
+              </option>
+
+              <option value="External Window Cleaning">
+                External Window Cleaning — safely reachable only
+              </option>
+
+              <option value="Custom / Small Cleaning Job">
+                Custom / Small Cleaning Job
+              </option>
+
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="bookingDate">Preferred date *</label>
+            <input id="bookingDate" type="date" required>
+          </div>
+
+          <div class="field">
+            <label for="bookingTime">Preferred time *</label>
+
+            <select id="bookingTime" required>
+              <option value="">Choose a time</option>
+              <option>08:00 - 10:00</option>
+              <option>10:00 - 12:00</option>
+              <option>12:00 - 14:00</option>
+              <option>14:00 - 16:00</option>
+              <option>16:00 - 18:00</option>
+              <option>18:00 - 20:00</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="estimatedPrice">Estimated price</label>
+            <input id="estimatedPrice" readonly>
+          </div>
+
+          <div class="field full-field">
+            <label for="propertyAddress">Property address *</label>
+            <textarea
+              id="propertyAddress"
+              required
+              placeholder="Full property address"
+            ></textarea>
+          </div>
+
+          <div class="field full-field">
+
+            <div class="payment-box">
+
+              <label for="paymentPreference">
+                Preferred payment arrangement
+              </label>
+
+              <select id="paymentPreference">
+                <option value="Pay after service">
+                  Pay after service / on completion
+                </option>
+
+                <option value="Online payment">
+                  Online payment if available
+                </option>
+
+                <option value="Discuss">
+                  Discuss with the team
+                </option>
+              </select>
+
+            </div>
+
+          </div>
+
+          <div class="field full-field">
+
+            <label for="propertyPhotos">
+              Property photos — optional
+            </label>
+
+            <input
+              id="propertyPhotos"
+              type="file"
+              accept="image/*"
+              multiple
+              onchange="previewPhotos(event)"
+            >
+
+            <div class="file-note">
+              Up to 5 photos. Maximum 6MB per photo.
+            </div>
+
+            <div class="photo-preview" id="photoPreview"></div>
+
+          </div>
+
+          <div class="field full-field">
+            <label for="bookingNotes">Anything else we should know?</label>
+
+            <textarea
+              id="bookingNotes"
+              placeholder="Access information, special requirements, parking, pets, specific areas, etc."
+            ></textarea>
+          </div>
+
+        </div>
+
+        <div class="form-actions">
+
+          <a
+            class="btn btn-outline"
+            href="mailto:info@thecleaningvalley.co.uk?subject=Cleaning%20Enquiry"
+          >
+            Email Instead
+          </a>
+
+          <button class="btn btn-primary" type="submit">
+            Send Cleaning Request
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script>
+/*
+=========================================================
+THE CLEANING VALLEY
+EASY PRICING CONFIGURATION
+=========================================================
+
+Later, pricing can be changed here without rebuilding
+the whole design.
+
+Example:
+smallJobAdjustment: 20
+
+Change 20 to 25 if you want £25.
+
+=========================================================
+*/
+
+const PRICING_CONFIG = {
+
+  smallJobAdjustment: 20,
+
+  bundleDiscounts: {
+    2: 0.03,
+    3: 0.05,
+    4: 0.07
+  }
+
+};
+
+let currentEstimate = {
+  price:0,
+  service:"",
+  details:[],
+  discount:0
+};
+
+
+function money(value){
+  return "£" + Math.round(Number(value || 0)).toLocaleString("en-GB");
+}
+
+
+function escapeHtml(value){
+  return String(value)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+
+function calculateEstimate(){
+
+  const service = document.getElementById("service");
+
+  const serviceName =
+    service.options[service.selectedIndex].text;
+
+  const base =
+    Number(service.value || 0);
+
+
+  const bedroom =
+    document.getElementById("bedroom");
+
+  const bedroomValue =
+    Number(bedroom.value || 0);
+
+
+  const bathroom =
+    document.getElementById("bathroom");
+
+  const bathroomValue =
+    Number(bathroom.value || 0);
+
+
+  const condition =
+    document.getElementById("condition");
+
+  const conditionValue =
+    Number(condition.value || 0);
+
+
+  const details = [
+
+    [
+      serviceName.split(" —")[0],
+      money(base)
+    ],
+
+    [
+      bedroom.options[bedroom.selectedIndex].text,
+      money(bedroomValue)
+    ],
+
+    [
+      bathroom.options[bathroom.selectedIndex].text,
+      money(bathroomValue)
+    ],
+
+    [
+      condition.options[condition.selectedIndex].text.split(" —")[0],
+      money(conditionValue)
+    ]
+
+  ];
+
+
+  let extrasTotal = 0;
+
+  let selectedExtraCount = 0;
+
+
+  document
+    .querySelectorAll('#estimate input[type="checkbox"]:checked')
+    .forEach(function(cb){
+
+      const value =
+        Number(cb.value || 0);
+
+      extrasTotal += value;
+
+      selectedExtraCount++;
+
+      details.push([
+        cb.dataset.label || "Extra service",
+        money(value)
+      ]);
+
+    });
+
+
+  const carpet =
+    document.querySelector('input[name="carpet"]:checked');
+
+
+  if(carpet && Number(carpet.value) > 0){
+
+    extrasTotal += Number(carpet.value);
+
+    selectedExtraCount++;
+
+    details.push([
+      carpet.dataset.label,
+      money(Number(carpet.value))
+    ]);
+
+  }
+
+
+  let subtotal =
+    base +
+    bedroomValue +
+    bathroomValue +
+    conditionValue +
+    extrasTotal;
+
+
+  const propertySelectionCount =
+
+    (bedroomValue > 0 ? 1 : 0) +
+
+    (bathroomValue > 0 ? 1 : 0) +
+
+    (conditionValue > 0 ? 1 : 0) +
+
+    selectedExtraCount;
+
+
+  /*
+  Small jobs should not become unrealistically cheap.
+  The adjustment is intentionally not shown as a separate fee.
+  */
+
+  if(
+    propertySelectionCount === 0 &&
+    subtotal < 110
+  ){
+
+    subtotal +=
+      PRICING_CONFIG.smallJobAdjustment;
+
+  }
+
+
+  let discountRate = 0;
+
+
+  if(selectedExtraCount >= 4){
+
+    discountRate =
+      PRICING_CONFIG.bundleDiscounts[4];
+
+  }
+
+  else if(selectedExtraCount === 3){
+
+    discountRate =
+      PRICING_CONFIG.bundleDiscounts[3];
+
+  }
+
+  else if(selectedExtraCount === 2){
+
+    discountRate =
+      PRICING_CONFIG.bundleDiscounts[2];
+
+  }
+
+
+  const discount =
+    subtotal * discountRate;
+
+
+  const finalPrice =
+    Math.max(0,subtotal - discount);
+
+
+  const low =
+    finalPrice * 0.94;
+
+
+  const high =
+    finalPrice * 1.08;
+
+
+  document.getElementById("estimatePrice")
+    .textContent =
+    money(finalPrice);
+
+
+  document.getElementById("estimateRange")
+    .textContent =
+    "Approximate range: " +
+    money(low) +
+    "–" +
+    money(high);
+
+
+  const list =
+    document.getElementById("summaryList");
+
+
+  list.innerHTML =
+    details.map(function(item){
+
+      return `
+        <li>
+          <span>${escapeHtml(item[0])}</span>
+          <span>${escapeHtml(item[1])}</span>
+        </li>
+      `;
+
+    }).join("");
+
+
+  const badge =
+    document.getElementById("discountBadge");
+
+
+  if(discountRate > 0){
+
+    badge.style.display =
+      "inline-block";
+
+    badge.textContent =
+      Math.round(discountRate * 100) +
+      "% bundle saving applied";
+
+  }
+
+  else{
+
+    badge.style.display =
+      "none";
+
+  }
+
+
+  currentEstimate = {
+
+    price:
+      Math.round(finalPrice),
+
+    service:
+      serviceName.split(" —")[0],
+
+    details:
+      details,
+
+    discount:
+      Math.round(discount)
+
+  };
+
+
+  document.getElementById("estimatedPrice")
+    .value =
+    money(finalPrice) +
+    " estimated";
+
+}
+
+
+function scrollToEstimate(){
+
+  document
+    .getElementById("estimate")
+    .scrollIntoView({
+      behavior:"smooth"
+    });
+
+}
+
+
+function openBooking(){
+
+  document
+    .getElementById("bookingModal")
+    .classList.add("open");
+
+  document
+    .getElementById("bookingModal")
+    .setAttribute("aria-hidden","false");
+
+  document.body.style.overflow =
+    "hidden";
+
+  calculateEstimate();
+
+}
+
+
+function openBookingWithService(serviceName){
+
+  openBooking();
+
+
+  const select =
+    document.getElementById("bookingService");
+
+
+  const options =
+    Array.from(select.options);
+
+
+  const exact =
+    options.find(function(option){
+
+      return option.text === serviceName;
+
+    });
+
+
+  if(exact){
+
+    select.value =
+      serviceName;
+
+  }
+
+  else if(serviceName.includes("Carpet")){
+
+    select.value =
+      "Carpet Cleaning";
+
+  }
+
+  else{
+
+    select.value =
+      "Custom / Small Cleaning Job";
+
+  }
+
+
+  let estimateText =
+    money(currentEstimate.price) +
+    " estimated";
+
+
+  if(serviceName.includes("Carpet")){
+
+    estimateText =
+      "From £35 — final estimate to confirm";
+
+  }
+
+  else if(serviceName.includes("Sofa")){
+
+    estimateText =
+      "From £30 — final estimate to confirm";
+
+  }
+
+  else if(serviceName.includes("Oven")){
+
+    estimateText =
+      "From £35 — final estimate to confirm";
+
+  }
+
+  else if(serviceName.includes("Fridge")){
+
+    estimateText =
+      "From £25 — final estimate to confirm";
+
+  }
+
+  else if(serviceName.includes("Cupboard")){
+
+    estimateText =
+      "From £25 — final estimate to confirm";
+
+  }
+
+  else if(serviceName.includes("Internal Window")){
+
+    estimateText =
+      "From £30 — final estimate to confirm";
+
+  }
+
+  else if(serviceName.includes("External Window")){
+
+    estimateText =
+      "From £40 — safely reachable only";
+
+  }
+
+
+  document.getElementById("estimatedPrice")
+    .value =
+    estimateText;
+
+}
+
+
+function bookFromEstimate(){
+
+  openBooking();
+
+
+  const select =
+    document.getElementById("bookingService");
+
+
+  const match =
+    Array.from(select.options)
+      .find(function(option){
+
+        return option.text ===
+          currentEstimate.service;
+
+      });
+
+
+  if(match){
+
+    select.value =
+      currentEstimate.service;
+
+  }
+
+
+  document.getElementById("estimatedPrice")
+    .value =
+    money(currentEstimate.price) +
+    " estimated";
+
+}
+
+
+function closeBooking(){
+
+  document
+    .getElementById("bookingModal")
+    .classList.remove("open");
+
+  document
+    .getElementById("bookingModal")
+    .setAttribute("aria-hidden","true");
+
+  document.body.style.overflow = "";
+
+}
+
+
+function showNotice(message,type){
+
+  const notice =
+    document.getElementById("formNotice");
+
+  notice.textContent =
+    message;
+
+  notice.className =
+    "notice show " +
+    type;
+
+}
+
+
+function previewPhotos(event){
+
+  const files =
+    Array.from(event.target.files || []);
+
+
+  if(files.length > 5){
+
+    event.target.value = "";
+
+    showNotice(
+      "Please select a maximum of 5 photos.",
+      "error"
+    );
+
+    document.getElementById("photoPreview")
+      .innerHTML = "";
+
+    return;
+
+  }
+
+
+  const invalid =
+    files.find(function(file){
+
+      return file.size >
+        6 * 1024 * 1024;
+
+    });
+
+
+  if(invalid){
+
+    event.target.value = "";
+
+    showNotice(
+      "Each photo must be 6MB or smaller.",
+      "error"
+    );
+
+    document.getElementById("photoPreview")
+      .innerHTML = "";
+
+    return;
+
+  }
+
+
+  const preview =
+    document.getElementById("photoPreview");
+
+
+  preview.innerHTML = "";
+
+
+  files.forEach(function(file){
+
+    if(!file.type.startsWith("image/"))
+      return;
+
+
+    const img =
+      document.createElement("img");
+
+
+    img.alt =
+      "Property photo preview";
+
+
+    const reader =
+      new FileReader();
+
+
+    reader.onload =
+      function(e){
+
+        img.src =
+          e.target.result;
+
+      };
+
+
+    reader.readAsDataURL(file);
+
+
+    preview.appendChild(img);
+
+  });
+
+
+  if(files.length){
+
+    showNotice(
+      files.length +
+      " photo" +
+      (files.length > 1 ? "s" : "") +
+      " selected.",
+      "success"
+    );
+
+  }
+
+}
+
+
+function submitBooking(event){
+
+  event.preventDefault();
+
+
+  const files =
+    Array.from(
+      document.getElementById("propertyPhotos").files || []
+    );
+
+
+  if(files.length > 5){
+
+    showNotice(
+      "Please select a maximum of 5 photos.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  for(const file of files){
+
+    if(file.size > 6 * 1024 * 1024){
+
+      showNotice(
+        "Each photo must be 6MB or smaller.",
+        "error"
+      );
+
+      return;
+
+    }
+
+  }
+
+
+  /*
+  CURRENT TEST VERSION
+
+  The website is currently frontend-only.
+
+  It prepares the booking information but does NOT
+  falsely claim that it has been saved to a live database.
+
+  Supabase + admin app will be connected in the next stage.
+  */
+
+
+  const reference =
+    "TCV-" +
+    Math.floor(
+      100000 +
+      Math.random() * 900000
+    );
+
+
+  const booking = {
+
+    reference:
+
+      reference,
+
+    name:
+
+      document
+        .getElementById("customerName")
+        .value
+        .trim(),
+
+    phone:
+
+      document
+        .getElementById("customerPhone")
+        .value
+        .trim(),
+
+    email:
+
+      document
+        .getElementById("customerEmail")
+        .value
+        .trim(),
+
+    postcode:
+
+      document
+        .getElementById("postcode")
+        .value
+        .trim(),
+
+    service:
+
+      document
+        .getElementById("bookingService")
+        .value,
+
+    date:
+
+      document
+        .getElementById("bookingDate")
+        .value,
+
+    time:
+
+      document
+        .getElementById("bookingTime")
+        .value,
+
+    estimatedPrice:
+
+      document
+        .getElementById("estimatedPrice")
+        .value,
+
+    address:
+
+      document
+        .getElementById("propertyAddress")
+        .value
+        .trim(),
+
+    payment:
+
+      document
+        .getElementById("paymentPreference")
+        .value,
+
+    notes:
+
+      document
+        .getElementById("bookingNotes")
+        .value
+        .trim(),
+
+    photoCount:
+
+      files.length
+
+  };
+
+
+  console.log(
+    "Booking request prepared:",
+    booking
+  );
+
+
+  document.getElementById("bookingContent")
+    .innerHTML = `
+
+      <div class="booking-success">
+
+        <div class="success-icon">
+          ✓
+        </div>
+
+        <div class="section-kicker">
+          Request Prepared
+        </div>
+
+        <h2>
+          Thank you, ${escapeHtml(booking.name)}.
+        </h2>
+
+        <p class="modal-sub">
+          Your cleaning request has been prepared successfully.
+          Your reference is:
+        </p>
+
+        <div class="booking-ref">
+          ${reference}
+        </div>
+
+        <p class="modal-sub">
+
+          <strong>Website test stage:</strong>
+          the request is currently prepared in the browser.
+          Live booking storage, customer status, photos,
+          invoices and admin controls will be connected
+          in the next stage.
+
+        </p>
+
+        <div class="form-actions">
+
+          <a
+            class="btn btn-primary"
+            href="tel:07767905631"
+          >
+            Call 07767 905631
+          </a>
+
+          <a
+            class="btn btn-outline"
+            href="mailto:info@thecleaningvalley.co.uk?subject=Cleaning%20Request%20${reference}"
+          >
+            Email Request
+          </a>
+
+          <button
+            class="btn btn-outline"
+            onclick="closeBooking();location.reload();"
+          >
+            Close
+          </button>
+
+        </div>
+
+      </div>
+
+    `;
+
+}
+
+
+document.getElementById("year")
+  .textContent =
+  new Date().getFullYear();
+
+
+const dateInput =
+  document.getElementById("bookingDate");
+
+
+const today =
+  new Date();
+
+
+const yyyy =
+  today.getFullYear();
+
+
+const mm =
+  String(today.getMonth()+1)
+    .padStart(2,"0");
+
+
+const dd =
+  String(today.getDate())
+    .padStart(2,"0");
+
+
+dateInput.min =
+  `${yyyy}-${mm}-${dd}`;
+
+
+document
+  .querySelectorAll(
+    '#estimate select,#estimate input[type="checkbox"],#estimate input[name="carpet"]'
+  )
+  .forEach(function(element){
+
+    element.addEventListener(
+      "change",
+      calculateEstimate
+    );
+
+  });
+
+
+calculateEstimate();
+
+
+document
+  .getElementById("bookingModal")
+  .addEventListener(
+    "click",
+    function(e){
+
+      if(e.target === this){
+
+        closeBooking();
+
+      }
+
+    }
+  );
+
+
+document.addEventListener(
+  "keydown",
+  function(e){
+
+    if(e.key === "Escape"){
+
+      closeBooking();
+
+    }
+
+  }
+);
+
+</script>
+
+</body>
+</html>

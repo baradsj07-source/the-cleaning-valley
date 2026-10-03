@@ -2173,7 +2173,7 @@ details p{
             Email Instead
           </a>
 
-          <button class="btn btn-primary" type="submit">
+          <button class="btn btn-primary" id="submitBookingButton" type="submit">
             Send Cleaning Request
           </button>
 
@@ -2188,21 +2188,60 @@ details p{
 </div>
 
 
+<!-- =====================================================
+     SUPABASE JAVASCRIPT LIBRARY
+===================================================== -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
 <script>
 /*
 =========================================================
 THE CLEANING VALLEY
-EASY PRICING CONFIGURATION
+SUPABASE + PRICING + BOOKING SYSTEM
 =========================================================
+*/
 
-Later, pricing can be changed here without rebuilding
-the whole design.
 
-Example:
-smallJobAdjustment: 20
+/* =====================================================
+   SUPABASE CONNECTION
+===================================================== */
 
-Change 20 to 25 if you want £25.
+const SUPABASE_URL =
+  "https://otpzgdudfrkmqojbqpql.supabase.co";
 
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_ozE9xk-T3554iTqwegzjxg_nllaXg_6";
+
+
+let supabaseClient = null;
+
+
+if(
+  window.supabase &&
+  typeof window.supabase.createClient === "function"
+){
+
+  supabaseClient =
+    window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_PUBLISHABLE_KEY
+    );
+
+}
+
+
+/* =====================================================
+   SUPABASE STORAGE SETTINGS
+===================================================== */
+
+const STORAGE_BUCKET =
+  "property-photos";
+
+
+/*
+=========================================================
+EASY PRICING CONFIGURATION
 =========================================================
 */
 
@@ -2218,6 +2257,7 @@ const PRICING_CONFIG = {
 
 };
 
+
 let currentEstimate = {
   price:0,
   service:"",
@@ -2226,24 +2266,40 @@ let currentEstimate = {
 };
 
 
+/* =====================================================
+   BASIC HELPERS
+===================================================== */
+
 function money(value){
-  return "£" + Math.round(Number(value || 0)).toLocaleString("en-GB");
+
+  return "£" +
+    Math.round(
+      Number(value || 0)
+    ).toLocaleString("en-GB");
+
 }
 
 
 function escapeHtml(value){
+
   return String(value)
     .replaceAll("&","&amp;")
     .replaceAll("<","&lt;")
     .replaceAll(">","&gt;")
     .replaceAll('"',"&quot;")
     .replaceAll("'","&#039;");
+
 }
 
 
+/* =====================================================
+   PRICING CALCULATOR
+===================================================== */
+
 function calculateEstimate(){
 
-  const service = document.getElementById("service");
+  const service =
+    document.getElementById("service");
 
   const serviceName =
     service.options[service.selectedIndex].text;
@@ -2323,12 +2379,18 @@ function calculateEstimate(){
 
 
   const carpet =
-    document.querySelector('input[name="carpet"]:checked');
+    document.querySelector(
+      'input[name="carpet"]:checked'
+    );
 
 
-  if(carpet && Number(carpet.value) > 0){
+  if(
+    carpet &&
+    Number(carpet.value) > 0
+  ){
 
-    extrasTotal += Number(carpet.value);
+    extrasTotal +=
+      Number(carpet.value);
 
     selectedExtraCount++;
 
@@ -2358,11 +2420,6 @@ function calculateEstimate(){
 
     selectedExtraCount;
 
-
-  /*
-  Small jobs should not become unrealistically cheap.
-  The adjustment is intentionally not shown as a separate fee.
-  */
 
   if(
     propertySelectionCount === 0 &&
@@ -2405,7 +2462,10 @@ function calculateEstimate(){
 
 
   const finalPrice =
-    Math.max(0,subtotal - discount);
+    Math.max(
+      0,
+      subtotal - discount
+    );
 
 
   const low =
@@ -2416,12 +2476,14 @@ function calculateEstimate(){
     finalPrice * 1.08;
 
 
-  document.getElementById("estimatePrice")
+  document
+    .getElementById("estimatePrice")
     .textContent =
     money(finalPrice);
 
 
-  document.getElementById("estimateRange")
+  document
+    .getElementById("estimateRange")
     .textContent =
     "Approximate range: " +
     money(low) +
@@ -2486,13 +2548,18 @@ function calculateEstimate(){
   };
 
 
-  document.getElementById("estimatedPrice")
+  document
+    .getElementById("estimatedPrice")
     .value =
     money(finalPrice) +
     " estimated";
 
 }
 
+
+/* =====================================================
+   PAGE / BOOKING FUNCTIONS
+===================================================== */
 
 function scrollToEstimate(){
 
@@ -2513,7 +2580,10 @@ function openBooking(){
 
   document
     .getElementById("bookingModal")
-    .setAttribute("aria-hidden","false");
+    .setAttribute(
+      "aria-hidden",
+      "false"
+    );
 
   document.body.style.overflow =
     "hidden";
@@ -2551,7 +2621,9 @@ function openBookingWithService(serviceName){
 
   }
 
-  else if(serviceName.includes("Carpet")){
+  else if(
+    serviceName.includes("Carpet")
+  ){
 
     select.value =
       "Carpet Cleaning";
@@ -2621,7 +2693,8 @@ function openBookingWithService(serviceName){
   }
 
 
-  document.getElementById("estimatedPrice")
+  document
+    .getElementById("estimatedPrice")
     .value =
     estimateText;
 
@@ -2655,7 +2728,8 @@ function bookFromEstimate(){
   }
 
 
-  document.getElementById("estimatedPrice")
+  document
+    .getElementById("estimatedPrice")
     .value =
     money(currentEstimate.price) +
     " estimated";
@@ -2671,20 +2745,33 @@ function closeBooking(){
 
   document
     .getElementById("bookingModal")
-    .setAttribute("aria-hidden","true");
+    .setAttribute(
+      "aria-hidden",
+      "true"
+    );
 
   document.body.style.overflow = "";
 
 }
 
 
+/* =====================================================
+   FORM NOTICE
+===================================================== */
+
 function showNotice(message,type){
 
   const notice =
     document.getElementById("formNotice");
 
+
+  if(!notice)
+    return;
+
+
   notice.textContent =
     message;
+
 
   notice.className =
     "notice show " +
@@ -2693,10 +2780,16 @@ function showNotice(message,type){
 }
 
 
+/* =====================================================
+   PHOTO PREVIEW + VALIDATION
+===================================================== */
+
 function previewPhotos(event){
 
   const files =
-    Array.from(event.target.files || []);
+    Array.from(
+      event.target.files || []
+    );
 
 
   if(files.length > 5){
@@ -2708,7 +2801,8 @@ function previewPhotos(event){
       "error"
     );
 
-    document.getElementById("photoPreview")
+    document
+      .getElementById("photoPreview")
       .innerHTML = "";
 
     return;
@@ -2719,8 +2813,10 @@ function previewPhotos(event){
   const invalid =
     files.find(function(file){
 
-      return file.size >
-        6 * 1024 * 1024;
+      return (
+        file.size >
+        6 * 1024 * 1024
+      );
 
     });
 
@@ -2734,7 +2830,34 @@ function previewPhotos(event){
       "error"
     );
 
-    document.getElementById("photoPreview")
+    document
+      .getElementById("photoPreview")
+      .innerHTML = "";
+
+    return;
+
+  }
+
+
+  const nonImage =
+    files.find(function(file){
+
+      return !file.type.startsWith("image/");
+
+    });
+
+
+  if(nonImage){
+
+    event.target.value = "";
+
+    showNotice(
+      "Only image files can be uploaded.",
+      "error"
+    );
+
+    document
+      .getElementById("photoPreview")
       .innerHTML = "";
 
     return;
@@ -2750,10 +2873,6 @@ function previewPhotos(event){
 
 
   files.forEach(function(file){
-
-    if(!file.type.startsWith("image/"))
-      return;
-
 
     const img =
       document.createElement("img");
@@ -2799,16 +2918,326 @@ function previewPhotos(event){
 }
 
 
-function submitBooking(event){
+/* =====================================================
+   GENERATE BOOKING REFERENCE
+===================================================== */
+
+function generateBookingReference(){
+
+  return (
+    "TCV-" +
+    Math.floor(
+      100000 +
+      Math.random() * 900000
+    )
+  );
+
+}
+
+
+/* =====================================================
+   UPLOAD PROPERTY PHOTOS
+===================================================== */
+
+async function uploadPropertyPhotos(
+  files,
+  reference
+){
+
+  if(!files.length){
+
+    return [];
+
+  }
+
+
+  if(!supabaseClient){
+
+    throw new Error(
+      "Supabase client could not be started."
+    );
+
+  }
+
+
+  const uploadedPaths = [];
+
+
+  for(
+    let index = 0;
+    index < files.length;
+    index++
+  ){
+
+    const file =
+      files[index];
+
+
+    const extension =
+      (
+        file.name.split(".").pop() ||
+        "jpg"
+      )
+      .toLowerCase()
+      .replace(/[^a-z0-9]/g,"");
+
+
+    const safeExtension =
+      extension || "jpg";
+
+
+    const filePath =
+      reference +
+      "/" +
+      Date.now() +
+      "-" +
+      index +
+      "." +
+      safeExtension;
+
+
+    const result =
+      await supabaseClient
+        .storage
+        .from(STORAGE_BUCKET)
+        .upload(
+          filePath,
+          file,
+          {
+            cacheControl:"3600",
+            upsert:false,
+            contentType:
+              file.type || "image/jpeg"
+          }
+        );
+
+
+    if(result.error){
+
+      console.error(
+        "Photo upload error:",
+        result.error
+      );
+
+      throw new Error(
+        "Property photo upload failed: " +
+        result.error.message
+      );
+
+    }
+
+
+    uploadedPaths.push(
+      filePath
+    );
+
+  }
+
+
+  return uploadedPaths;
+
+}
+
+
+/* =====================================================
+   INSERT BOOKING INTO SUPABASE
+===================================================== */
+
+async function insertBooking(
+  booking
+){
+
+  if(!supabaseClient){
+
+    throw new Error(
+      "Supabase connection is not available."
+    );
+
+  }
+
+
+  /*
+  First try the normal snake_case
+  column names.
+  */
+
+  const snakeCaseBooking = {
+
+    customer_name:
+      booking.name,
+
+    phone:
+      booking.phone,
+
+    email:
+      booking.email,
+
+    postcode:
+      booking.postcode,
+
+    property_address:
+      booking.address,
+
+    service:
+      booking.service,
+
+    booking_date:
+      booking.date,
+
+    booking_time:
+      booking.time,
+
+    estimated_price:
+      booking.estimatedPrice,
+
+    payment_method:
+      booking.payment,
+
+    notes:
+      booking.notes,
+
+    photo_count:
+      booking.photoCount,
+
+    booking_reference:
+      booking.reference,
+
+    status:
+      "New"
+
+  };
+
+
+  let result =
+    await supabaseClient
+      .from("bookings")
+      .insert(
+        snakeCaseBooking
+      )
+      .select();
+
+
+  /*
+  If the database uses the earlier
+  space-style column names, try that
+  format automatically.
+  */
+
+  if(
+    result.error &&
+    (
+      result.error.code === "PGRST204" ||
+      result.error.code === "42703"
+    )
+  ){
+
+    console.warn(
+      "Trying alternate booking column names..."
+    );
+
+
+    const alternateBooking = {
+
+      "customer name":
+        booking.name,
+
+      phone:
+        booking.phone,
+
+      email:
+        booking.email,
+
+      postcode:
+        booking.postcode,
+
+      property_address:
+        booking.address,
+
+      service:
+        booking.service,
+
+      "booking date":
+        booking.date,
+
+      "booking time":
+        booking.time,
+
+      "estimated price":
+        booking.estimatedPrice,
+
+      "payment method":
+        booking.payment,
+
+      notes:
+        booking.notes,
+
+      "photo count":
+        booking.photoCount,
+
+      "booking reference":
+        booking.reference,
+
+      status:
+        "New"
+
+    };
+
+
+    result =
+      await supabaseClient
+        .from("bookings")
+        .insert(
+          alternateBooking
+        )
+        .select();
+
+  }
+
+
+  if(result.error){
+
+    console.error(
+      "Booking database error:",
+      result.error
+    );
+
+
+    throw result.error;
+
+  }
+
+
+  return result.data;
+
+}
+
+
+/* =====================================================
+   MAIN BOOKING SUBMISSION
+===================================================== */
+
+async function submitBooking(event){
 
   event.preventDefault();
 
 
-  const files =
-    Array.from(
-      document.getElementById("propertyPhotos").files || []
+  const submitButton =
+    document.getElementById(
+      "submitBookingButton"
     );
 
+
+  const files =
+    Array.from(
+      document
+        .getElementById("propertyPhotos")
+        .files || []
+    );
+
+
+  /* -----------------------------------------------
+     PHOTO VALIDATION
+  ------------------------------------------------ */
 
   if(files.length > 5){
 
@@ -2824,7 +3253,24 @@ function submitBooking(event){
 
   for(const file of files){
 
-    if(file.size > 6 * 1024 * 1024){
+    if(
+      !file.type.startsWith("image/")
+    ){
+
+      showNotice(
+        "Only image files can be uploaded.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    if(
+      file.size >
+      6 * 1024 * 1024
+    ){
 
       showNotice(
         "Each photo must be 6MB or smaller.",
@@ -2838,192 +3284,396 @@ function submitBooking(event){
   }
 
 
-  /*
-  CURRENT TEST VERSION
+  /* -----------------------------------------------
+     CHECK SUPABASE
+  ------------------------------------------------ */
 
-  The website is currently frontend-only.
+  if(!supabaseClient){
 
-  It prepares the booking information but does NOT
-  falsely claim that it has been saved to a live database.
-
-  Supabase + admin app will be connected in the next stage.
-  */
-
-
-  const reference =
-    "TCV-" +
-    Math.floor(
-      100000 +
-      Math.random() * 900000
+    showNotice(
+      "Booking system could not connect. Please refresh the page and try again.",
+      "error"
     );
 
+    return;
 
-  const booking = {
-
-    reference:
-
-      reference,
-
-    name:
-
-      document
-        .getElementById("customerName")
-        .value
-        .trim(),
-
-    phone:
-
-      document
-        .getElementById("customerPhone")
-        .value
-        .trim(),
-
-    email:
-
-      document
-        .getElementById("customerEmail")
-        .value
-        .trim(),
-
-    postcode:
-
-      document
-        .getElementById("postcode")
-        .value
-        .trim(),
-
-    service:
-
-      document
-        .getElementById("bookingService")
-        .value,
-
-    date:
-
-      document
-        .getElementById("bookingDate")
-        .value,
-
-    time:
-
-      document
-        .getElementById("bookingTime")
-        .value,
-
-    estimatedPrice:
-
-      document
-        .getElementById("estimatedPrice")
-        .value,
-
-    address:
-
-      document
-        .getElementById("propertyAddress")
-        .value
-        .trim(),
-
-    payment:
-
-      document
-        .getElementById("paymentPreference")
-        .value,
-
-    notes:
-
-      document
-        .getElementById("bookingNotes")
-        .value
-        .trim(),
-
-    photoCount:
-
-      files.length
-
-  };
+  }
 
 
-  console.log(
-    "Booking request prepared:",
-    booking
+  /* -----------------------------------------------
+     READ FORM
+  ------------------------------------------------ */
+
+  const name =
+    document
+      .getElementById("customerName")
+      .value
+      .trim();
+
+
+  const phone =
+    document
+      .getElementById("customerPhone")
+      .value
+      .trim();
+
+
+  const email =
+    document
+      .getElementById("customerEmail")
+      .value
+      .trim();
+
+
+  const postcode =
+    document
+      .getElementById("postcode")
+      .value
+      .trim();
+
+
+  const service =
+    document
+      .getElementById("bookingService")
+      .value;
+
+
+  const date =
+    document
+      .getElementById("bookingDate")
+      .value;
+
+
+  const time =
+    document
+      .getElementById("bookingTime")
+      .value;
+
+
+  const estimatedPrice =
+    document
+      .getElementById("estimatedPrice")
+      .value;
+
+
+  const address =
+    document
+      .getElementById("propertyAddress")
+      .value
+      .trim();
+
+
+  const payment =
+    document
+      .getElementById("paymentPreference")
+      .value;
+
+
+  const notes =
+    document
+      .getElementById("bookingNotes")
+      .value
+      .trim();
+
+
+  /* -----------------------------------------------
+     GENERATE REFERENCE
+  ------------------------------------------------ */
+
+  const reference =
+    generateBookingReference();
+
+
+  /* -----------------------------------------------
+     DISABLE BUTTON
+  ------------------------------------------------ */
+
+  submitButton.disabled =
+    true;
+
+
+  submitButton.style.opacity =
+    "0.7";
+
+
+  submitButton.textContent =
+    "Sending Request...";
+
+
+  showNotice(
+    "Sending your cleaning request...",
+    "success"
   );
 
 
-  document.getElementById("bookingContent")
-    .innerHTML = `
+  try{
 
-      <div class="booking-success">
+    /* ---------------------------------------------
+       STEP 1 — SAVE BOOKING
+    --------------------------------------------- */
 
-        <div class="success-icon">
-          ✓
+    const booking = {
+
+      reference:
+        reference,
+
+      name:
+        name,
+
+      phone:
+        phone,
+
+      email:
+        email,
+
+      postcode:
+        postcode,
+
+      service:
+        service,
+
+      date:
+        date,
+
+      time:
+        time,
+
+      estimatedPrice:
+        estimatedPrice,
+
+      address:
+        address,
+
+      payment:
+        payment,
+
+      notes:
+        notes,
+
+      photoCount:
+        files.length
+
+    };
+
+
+    console.log(
+      "Saving booking:",
+      booking
+    );
+
+
+    await insertBooking(
+      booking
+    );
+
+
+    /* ---------------------------------------------
+       STEP 2 — UPLOAD PHOTOS
+    --------------------------------------------- */
+
+    let uploadedPhotoPaths = [];
+
+
+    if(files.length){
+
+      showNotice(
+        "Booking saved. Uploading property photos...",
+        "success"
+      );
+
+
+      uploadedPhotoPaths =
+        await uploadPropertyPhotos(
+          files,
+          reference
+        );
+
+    }
+
+
+    console.log(
+      "Uploaded property photos:",
+      uploadedPhotoPaths
+    );
+
+
+    /* ---------------------------------------------
+       STEP 3 — SUCCESS SCREEN
+    --------------------------------------------- */
+
+    document
+      .getElementById("bookingContent")
+      .innerHTML = `
+
+        <div class="booking-success">
+
+          <div class="success-icon">
+            ✓
+          </div>
+
+          <div class="section-kicker">
+            Request Received
+          </div>
+
+          <h2>
+            Thank you, ${escapeHtml(name)}.
+          </h2>
+
+          <p class="modal-sub">
+            Your cleaning request has been successfully
+            submitted to The Cleaning Valley.
+          </p>
+
+          <div class="booking-ref">
+            ${escapeHtml(reference)}
+          </div>
+
+          <p class="modal-sub">
+            Please keep this reference for your records.
+          </p>
+
+          ${
+            files.length
+              ? `
+                <p class="modal-sub">
+                  ${files.length}
+                  property photo${files.length > 1 ? "s" : ""}
+                  uploaded successfully.
+                </p>
+              `
+              : ""
+          }
+
+          <p class="modal-sub">
+            <strong>Service:</strong>
+            ${escapeHtml(service)}
+            <br>
+
+            <strong>Preferred date:</strong>
+            ${escapeHtml(date)}
+            <br>
+
+            <strong>Preferred time:</strong>
+            ${escapeHtml(time)}
+          </p>
+
+          <div class="form-actions">
+
+            <a
+              class="btn btn-primary"
+              href="tel:07767905631"
+            >
+              Call 07767 905631
+            </a>
+
+            <a
+              class="btn btn-outline"
+              href="mailto:info@thecleaningvalley.co.uk?subject=Cleaning%20Request%20${encodeURIComponent(reference)}"
+            >
+              Email Us
+            </a>
+
+            <button
+              class="btn btn-outline"
+              onclick="closeBooking();location.reload();"
+            >
+              Close
+            </button>
+
+          </div>
+
         </div>
 
-        <div class="section-kicker">
-          Request Prepared
-        </div>
+      `;
 
-        <h2>
-          Thank you, ${escapeHtml(booking.name)}.
-        </h2>
 
-        <p class="modal-sub">
-          Your cleaning request has been prepared successfully.
-          Your reference is:
-        </p>
+  }
 
-        <div class="booking-ref">
-          ${reference}
-        </div>
+  catch(error){
 
-        <p class="modal-sub">
+    console.error(
+      "BOOKING SUBMISSION ERROR:",
+      error
+    );
 
-          <strong>Website test stage:</strong>
-          the request is currently prepared in the browser.
-          Live booking storage, customer status, photos,
-          invoices and admin controls will be connected
-          in the next stage.
 
-        </p>
+    let message =
+      "We could not submit your booking. Please try again.";
 
-        <div class="form-actions">
 
-          <a
-            class="btn btn-primary"
-            href="tel:07767905631"
-          >
-            Call 07767 905631
-          </a>
+    if(
+      error &&
+      error.code === "42501"
+    ){
 
-          <a
-            class="btn btn-outline"
-            href="mailto:info@thecleaningvalley.co.uk?subject=Cleaning%20Request%20${reference}"
-          >
-            Email Request
-          </a>
+      message =
+        "Booking permission is not enabled in Supabase yet. Please contact the website administrator.";
 
-          <button
-            class="btn btn-outline"
-            onclick="closeBooking();location.reload();"
-          >
-            Close
-          </button>
+    }
 
-        </div>
+    else if(
+      error &&
+      error.code === "PGRST301"
+    ){
 
-      </div>
+      message =
+        "Supabase access was rejected. Please check the database permissions.";
 
-    `;
+    }
+
+    else if(
+      error &&
+      error.message
+    ){
+
+      message =
+        error.message;
+
+    }
+
+
+    /*
+    If photos failed after booking was saved,
+    tell the customer clearly instead of pretending
+    everything completed.
+    */
+
+    showNotice(
+      message,
+      "error"
+    );
+
+
+    submitButton.disabled =
+      false;
+
+
+    submitButton.style.opacity =
+      "1";
+
+
+    submitButton.textContent =
+      "Send Cleaning Request";
+
+  }
 
 }
 
 
-document.getElementById("year")
+/* =====================================================
+   PAGE INITIALISATION
+===================================================== */
+
+document
+  .getElementById("year")
   .textContent =
   new Date().getFullYear();
 
 
 const dateInput =
-  document.getElementById("bookingDate");
+  document.getElementById(
+    "bookingDate"
+  );
 
 
 const today =
@@ -3035,13 +3685,15 @@ const yyyy =
 
 
 const mm =
-  String(today.getMonth()+1)
-    .padStart(2,"0");
+  String(
+    today.getMonth() + 1
+  ).padStart(2,"0");
 
 
 const dd =
-  String(today.getDate())
-    .padStart(2,"0");
+  String(
+    today.getDate()
+  ).padStart(2,"0");
 
 
 dateInput.min =
@@ -3065,6 +3717,10 @@ document
 calculateEstimate();
 
 
+/* =====================================================
+   MODAL CLICK OUTSIDE
+===================================================== */
+
 document
   .getElementById("bookingModal")
   .addEventListener(
@@ -3080,6 +3736,10 @@ document
     }
   );
 
+
+/* =====================================================
+   ESC KEY
+===================================================== */
 
 document.addEventListener(
   "keydown",

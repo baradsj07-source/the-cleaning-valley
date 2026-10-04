@@ -3088,8 +3088,9 @@ async function insertBooking(
       booking.time,
 
     estimated_price:
-      booking.estimatedPrice,
-
+  parseFloat(
+    String(booking.estimatedPrice).replace(/[^0-9.]/g, "")
+  ),
     payment_method:
       booking.payment,
 

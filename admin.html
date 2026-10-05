@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>The Cleaning Valley | Admin Panel</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: "#0B2D5B",
+            orange: "#FF8A00"
+          }
+        }
+      }
+    }
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f7fb;
+    }
+
+    .hidden-section {
+      display: none !important;
+    }
+
+    .loader {
+      width: 22px;
+      height: 22px;
+      border: 3px solid #ddd;
+      border-top-color: #0B2D5B;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =====================================================
+       LOGIN SCREEN
+       ===================================================== -->
+
+  <div id="loginScreen" class="min-h-screen flex items-center justify-center px-4">
+
+    <div class="w-full max-w-md bg-white rounded-2xl shadow-xl p-8">
+
+      <div class="text-center mb-8">
+
+        <div
+          class="mx-auto mb-4 w-14 h-14 rounded-2xl bg-navy text-white flex items-center justify-center text-2xl font-bold">
+          TCV
+        </div>
+
+        <h1 class="text-2xl font-bold text-gray-900">
+          The Cleaning Valley
+        </h1>
+
+        <p class="text-gray-500 mt-1">
+          Admin Portal
+        </p>
+
+      </div>
+
+
+      <form id="loginForm" class="space-y-5">
+
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-2">
+            Admin Email
+          </label>
+
+          <input
+            id="loginEmail"
+            type="email"
+            required
+            autocomplete="email"
+            placeholder="Enter admin email"
+            class="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-navy"
+          />
+        </div>
+
+
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-2">
+            Password
+          </label>
+
+          <input
+            id="loginPassword"
+            type="password"
+            required
+            autocomplete="current-password"
+            placeholder="Enter password"
+            class="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-navy"
+          />
+        </div>
+
+
+        <button
+          id="loginButton"
+          type="submit"
+          class="w-full bg-navy hover:bg-blue-900 text-white font-bold py-3 rounded-xl transition"
+        >
+          Sign In
+        </button>
+
+      </form>
+
+
+      <div
+        id="loginError"
+        class="hidden mt-5 bg-red-50 border border-red-200 text-red-700 rounded-xl p-4 text-sm">
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       ADMIN APPLICATION
+       ===================================================== -->
+
+  <div id="adminApp" class="hidden-section min-h-screen">
+
+    <!-- TOP NAVIGATION -->
+
+    <header class="bg-navy text-white shadow-lg">
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4">
+
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+
+          <div>
+            <h1 class="text-xl sm:text-2xl font-bold">
+              The Cleaning Valley
+            </h1>
+
+            <p class="text-blue-100 text-sm">
+              Administration Dashboard
+            </p>
+          </div>
+
+
+          <div class="flex items-center gap-3">
+
+            <div class="text-right hidden sm:block">
+              <div id="adminEmailDisplay" class="text-sm font-semibold"></div>
+              <div class="text-xs text-blue-200">Administrator</div>
+            </div>
+
+            <button
+              id="logoutButton"
+              class="bg-white/10 hover:bg-white/20 border border-white/20 px-4 py-2 rounded-lg text-sm font-semibold">
+              Logout
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <!-- MAIN -->
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+
+
+      <!-- PAGE TITLE -->
+
+      <div class="mb-8">
+
+        <h2 class="text-3xl font-bold text-gray-900">
+          Dashboard
+        </h2>
+
+        <p class="text-gray-500 mt-1">
+          Manage bookings and monitor your cleaning business.
+        </p>
+
+      </div>
+
+
+      <!-- STATS -->
+
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+
+        <div class="bg-white rounded-2xl shadow-sm border p-5">
+          <p class="text-sm text-gray-500">Total Bookings</p>
+          <p id="totalBookings" class="text-3xl font-bold text-navy mt-2">0</p>
+        </div>
+
+
+        <div class="bg-white rounded-2xl shadow-sm border p-5">
+          <p class="text-sm text-gray-500">New</p>
+          <p id="newBookings" class="text-3xl font-bold text-orange mt-2">0</p>
+        </div>
+
+
+        <div class="bg-white rounded-2xl shadow-sm border p-5">
+          <p class="text-sm text-gray-500">Confirmed</p>
+          <p id="confirmedBookings" class="text-3xl font-bold text-blue-600 mt-2">0</p>
+        </div>
+
+
+        <div class="bg-white rounded-2xl shadow-sm border p-5">
+          <p class="text-sm text-gray-500">Completed</p>
+          <p id="completedBookings" class="text-3xl font-bold text-green-600 mt-2">0</p>
+        </div>
+
+      </div>
+
+
+      <!-- BOOKINGS -->
+
+      <section class="bg-white rounded-2xl shadow-sm border overflow-hidden">
+
+        <div class="p-5 border-b">
+
+          <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+
+            <div>
+              <h3 class="text-xl font-bold text-gray-900">
+                Bookings
+              </h3>
+
+              <p class="text-sm text-gray-500">
+                Recent customer booking requests
+              </p>
+            </div>
+
+
+            <div class="flex flex-col sm:flex-row gap-3">
+
+              <input
+                id="searchBookings"
+                type="search"
+                placeholder="Search name, phone, email..."
+                class="border border-gray-300 rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-navy"
+              />
+
+              <select
+                id="statusFilter"
+                class="border border-gray-300 rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-navy"
+              >
+                <option value="all">All Statuses</option>
+                <option value="New">New</option>
+                <option value="Pending">Pending</option>
+                <option value="Confirmed">Confirmed</option>
+                <option value="Cleaner Assigned">Cleaner Assigned</option>
+                <option value="On the Way">On the Way</option>
+                <option value="Cleaning Started">Cleaning Started</option>
+                <option value="Completed">Completed</option>
+                <option value="Cancelled">Cancelled</option>
+              </select>
+
+              <button
+                id="refreshBookings"
+                class="bg-gray-100 hover:bg-gray-200 px-4 py-2.5 rounded-xl text-sm font-semibold">
+                Refresh
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- LOADING -->
+
+        <div
+          id="bookingsLoading"
+          class="p-10 flex justify-center items-center gap-3 text-gray-500"
+        >
+          <div class="loader"></div>
+          Loading bookings...
+        </div>
+
+
+        <!-- ERROR -->
+
+        <div
+          id="bookingsError"
+          class="hidden m-5 bg-red-50 border border-red-200 text-red-700 rounded-xl p-4 text-sm">
+        </div>
+
+
+        <!-- TABLE -->
+
+        <div class="overflow-x-auto">
+
+          <table class="w-full text-left min-w-[1000px]">
+
+            <thead class="bg-gray-50 border-b">
+
+              <tr>
+
+                <th class="px-5 py-4 text-xs font-bold text-gray-500 uppercase">
+                  Reference
+                </th>
+
+                <th class="px-5 py-4 text-xs font-bold text-gray-500 uppercase">
+                  Customer
+                </th>
+
+                <th class="px-5 py-4 text-xs font-bold text-gray-500 uppercase">
+                  Service
+                </th>
+
+                <th class="px-5 py-4 text-xs font-bold text-gray-500 uppercase">
+                  Date
+                </th>
+
+                <th class="px-5 py-4 text-xs font-bold text-gray-500 uppercase">
+                  Rooms
+                </th>
+
+                <th class="px-5 py-4 text-xs font-bold text-gray-500 uppercase">
+                  Price
+                </th>
+
+                <th class="px-5 py-4 text-xs font-bold text-gray-500 uppercase">
+                  Payment
+                </th>
+
+                <th class="px-5 py-4 text-xs font-bold text-gray-500 uppercase">
+                  Status
+                </th>
+
+              </tr>
+
+            </thead>
+
+
+            <tbody id="bookingsTableBody" class="divide-y">
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+
+        <!-- EMPTY -->
+
+        <div
+          id="emptyBookings"
+          class="hidden p-12 text-center"
+        >
+
+          <div class="text-5xl mb-4">
+            📋
+          </div>
+
+          <h4 class="font-bold text-gray-900 text-lg">
+            No bookings found
+          </h4>
+
+          <p class="text-gray-500 mt-1">
+            Customer bookings will appear here.
+          </p>
+
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+
+  <!-- =====================================================
+       JAVASCRIPT
+       ===================================================== -->
+
+  <script>
+
+    /* -----------------------------------------------------
+       SUPABASE CONNECTION
+       ----------------------------------------------------- */
+
+    const SUPABASE_URL =
+      "https://otpzgdudfrkmqojbqpql.supabase.co";
+
+    const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_ozE9xk-T3554iTqwegzjxg_nllaXg_6";
+
+    const supabaseClient =
+      window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+      );
+
+
+    /* -----------------------------------------------------
+       ELEMENTS
+       ----------------------------------------------------- */
+
+    const loginScreen =
+      document.getElementById("loginScreen");
+
+    const adminApp =
+      document.getElementById("adminApp");
+
+    const loginForm =
+      document.getElementById("loginForm");
+
+    const loginButton =
+      document.getElementById("loginButton");
+
+    const loginError =
+      document.getElementById("loginError");
+
+    const logoutButton =
+      document.getElementById("logoutButton");
+
+    const adminEmailDisplay =
+      document.getElementById("adminEmailDisplay");
+
+    const bookingsTableBody =
+      document.getElementById("bookingsTableBody");
+
+    const bookingsLoading =
+      document.getElementById("bookingsLoading");
+
+    const bookingsError =
+      document.getElementById("bookingsError");
+
+    const emptyBookings =
+      document.getElementById("emptyBookings");
+
+    const searchBookings =
+      document.getElementById("searchBookings");
+
+    const statusFilter =
+      document.getElementById("statusFilter");
+
+    const refreshBookings =
+      document.getElementById("refreshBookings");
+
+
+    let allBookings = [];
+
+
+    /* -----------------------------------------------------
+       LOGIN ERROR
+       ----------------------------------------------------- */
+
+    function showLoginError(message) {
+
+      loginError.textContent = message;
+      loginError.classList.remove("hidden");
+
+    }
+
+
+    function hideLoginError() {
+
+      loginError.classList.add("hidden");
+
+    }
+
+
+    /* -----------------------------------------------------
+       CHECK ADMIN USER
+       ----------------------------------------------------- */
+
+    async function checkAdminAccess() {
+
+      const {
+        data: {
+          session
+        }
+      } = await supabaseClient.auth.getSession();
+
+
+      if (!session) {
+
+        showLoginScreen();
+
+        return false;
+      }
+
+
+      const {
+        data: adminRecord,
+        error
+      } = await supabaseClient
+        .from("admin_users")
+        .select("id, email, role")
+        .eq("user_id", session.user.id)
+        .maybeSingle();
+
+
+      if (error) {
+
+        console.error(error);
+
+        await supabaseClient.auth.signOut();
+
+        showLoginScreen();
+
+        showLoginError(
+          "Unable to verify admin access."
+        );
+
+        return false;
+      }
+
+
+      if (!adminRecord) {
+
+        await supabaseClient.auth.signOut();
+
+        showLoginScreen();
+
+        showLoginError(
+          "Access denied. This account is not an administrator."
+        );
+
+        return false;
+      }
+
+
+      adminEmailDisplay.textContent =
+        adminRecord.email || session.user.email || "";
+
+
+      showAdminApp();
+
+      await loadBookings();
+
+      return true;
+    }
+
+
+    /* -----------------------------------------------------
+       SHOW / HIDE SCREENS
+       ----------------------------------------------------- */
+
+    function showLoginScreen() {
+
+      loginScreen.classList.remove("hidden-section");
+      adminApp.classList.add("hidden-section");
+
+    }
+
+
+    function showAdminApp() {
+
+      loginScreen.classList.add("hidden-section");
+      adminApp.classList.remove("hidden-section");
+
+    }
+
+
+    /* -----------------------------------------------------
+       LOGIN
+       ----------------------------------------------------- */
+
+    loginForm.addEventListener("submit", async function(event) {
+
+      event.preventDefault();
+
+      hideLoginError();
+
+      loginButton.disabled = true;
+      loginButton.textContent = "Signing in...";
+
+
+      const email =
+        document.getElementById("loginEmail").value.trim();
+
+      const password =
+        document.getElementById("loginPassword").value;
+
+
+      const {
+        data,
+        error
+      } = await supabaseClient.auth.signInWithPassword({
+        email: email,
+        password: password
+      });
+
+
+      if (error) {
+
+        console.error(error);
+
+        showLoginError(
+          error.message || "Login failed."
+        );
+
+        loginButton.disabled = false;
+        loginButton.textContent = "Sign In";
+
+        return;
+      }
+
+
+      if (!data.session) {
+
+        showLoginError(
+          "Login session could not be created."
+        );
+
+        loginButton.disabled = false;
+        loginButton.textContent = "Sign In";
+
+        return;
+      }
+
+
+      const success =
+        await checkAdminAccess();
+
+
+      if (!success) {
+
+        loginButton.disabled = false;
+        loginButton.textContent = "Sign In";
+
+        return;
+      }
+
+
+      loginButton.disabled = false;
+      loginButton.textContent = "Sign In";
+
+    });
+
+
+    /* -----------------------------------------------------
+       LOGOUT
+       ----------------------------------------------------- */
+
+    logoutButton.addEventListener("click", async function() {
+
+      await supabaseClient.auth.signOut();
+
+      allBookings = [];
+
+      bookingsTableBody.innerHTML = "";
+
+      showLoginScreen();
+
+      document.getElementById("loginPassword").value = "";
+
+    });
+
+
+    /* -----------------------------------------------------
+       LOAD BOOKINGS
+       ----------------------------------------------------- */
+
+    async function loadBookings() {
+
+      bookingsLoading.classList.remove("hidden");
+      bookingsError.classList.add("hidden");
+      emptyBookings.classList.add("hidden");
+
+
+      const {
+        data,
+        error
+      } = await supabaseClient
+        .from("bookings")
+        .select("*")
+        .order("id", {
+          ascending: false
+        });
+
+
+      bookingsLoading.classList.add("hidden");
+
+
+      if (error) {
+
+        console.error(error);
+
+        bookingsError.textContent =
+          "Could not load bookings: " + error.message;
+
+        bookingsError.classList.remove("hidden");
+
+        return;
+      }
+
+
+      allBookings = data || [];
+
+      updateDashboardStats();
+
+      renderBookings();
+
+    }
+
+
+    /* -----------------------------------------------------
+       DASHBOARD STATS
+       ----------------------------------------------------- */
+
+    function updateDashboardStats() {
+
+      const total =
+        allBookings.length;
+
+
+      const newCount =
+        allBookings.filter(
+          booking =>
+            String(booking.status || "").toLowerCase() === "new"
+        ).length;
+
+
+      const confirmedCount =
+        allBookings.filter(
+          booking =>
+            String(booking.status || "").toLowerCase() === "confirmed"
+        ).length;
+
+
+      const completedCount =
+        allBookings.filter(
+          booking =>
+            String(booking.status || "").toLowerCase() === "completed"
+        ).length;
+
+
+      document.getElementById("totalBookings").textContent =
+        total;
+
+      document.getElementById("newBookings").textContent =
+        newCount;
+
+      document.getElementById("confirmedBookings").textContent =
+        confirmedCount;
+
+      document.getElementById("completedBookings").textContent =
+        completedCount;
+
+    }
+
+
+    /* -----------------------------------------------------
+       RENDER BOOKINGS
+       ----------------------------------------------------- */
+
+    function renderBookings() {
+
+      const search =
+        searchBookings.value.trim().toLowerCase();
+
+      const selectedStatus =
+        statusFilter.value;
+
+
+      const filtered =
+        allBookings.filter(function(booking) {
+
+          const customerName =
+            String(booking.customer_name || "").toLowerCase();
+
+          const phone =
+            String(booking.phone || "").toLowerCase();
+
+          const email =
+            String(booking.email || "").toLowerCase();
+
+          const reference =
+            String(booking.booking_reference || "").toLowerCase();
+
+          const service =
+            String(booking.service || "").toLowerCase();
+
+          const status =
+            String(booking.status || "");
+
+
+          const matchesSearch =
+            !search ||
+            customerName.includes(search) ||
+            phone.includes(search) ||
+            email.includes(search) ||
+            reference.includes(search) ||
+            service.includes(search);
+
+
+          const matchesStatus =
+            selectedStatus === "all" ||
+            status === selectedStatus;
+
+
+          return matchesSearch && matchesStatus;
+
+        });
+
+
+      bookingsTableBody.innerHTML = "";
+
+
+      if (filtered.length === 0) {
+
+        emptyBookings.classList.remove("hidden");
+
+        return;
+
+      }
+
+
+      emptyBookings.classList.add("hidden");
+
+
+      filtered.forEach(function(booking) {
+
+        const row =
+          document.createElement("tr");
+
+        row.className =
+          "hover:bg-gray-50";
+
+
+        const reference =
+          booking.booking_reference || "—";
+
+
+        const customer =
+          booking.customer_name || "—";
+
+
+        const service =
+          booking.service || "—";
+
+
+        const date =
+          booking.booking_date || "—";
+
+
+        const rooms =
+          booking.room_count ??
+          booking.rooms ??
+          booking.bedrooms ??
+          "—";
+
+
+        const price =
+          formatPrice(
+            booking.final_price ??
+            booking.estimated_price
+          );
+
+
+        const payment =
+          booking.payment_status ||
+          booking.payment_method ||
+          "Pending";
+
+
+        const status =
+          booking.status ||
+          "New";
+
+
+        row.innerHTML = `
+
+          <td class="px-5 py-4">
+            <div class="font-bold text-navy">
+              ${escapeHtml(reference)}
+            </div>
+          </td>
+
+
+          <td class="px-5 py-4">
+
+            <div class="font-semibold text-gray-900">
+              ${escapeHtml(customer)}
+            </div>
+
+            <div class="text-xs text-gray-500 mt-1">
+              ${escapeHtml(booking.phone || "")}
+            </div>
+
+            <div class="text-xs text-gray-500">
+              ${escapeHtml(booking.email || "")}
+            </div>
+
+          </td>
+
+
+          <td class="px-5 py-4">
+            <span class="text-sm text-gray-700">
+              ${escapeHtml(service)}
+            </span>
+          </td>
+
+
+          <td class="px-5 py-4">
+            <span class="text-sm text-gray-700">
+              ${escapeHtml(date)}
+            </span>
+          </td>
+
+
+          <td class="px-5 py-4">
+            <span class="text-sm text-gray-700">
+              ${escapeHtml(String(rooms))}
+            </span>
+          </td>
+
+
+          <td class="px-5 py-4">
+
+            <span class="font-semibold text-gray-900">
+              ${escapeHtml(price)}
+            </span>
+
+          </td>
+
+
+          <td class="px-5 py-4">
+
+            <span class="
+              inline-flex
+              px-3
+              py-1
+              rounded-full
+              text-xs
+              font-semibold
+              bg-gray-100
+              text-gray-700
+            ">
+              ${escapeHtml(payment)}
+            </span>
+
+          </td>
+
+
+          <td class="px-5 py-4">
+
+            ${statusBadge(status)}
+
+          </td>
+
+        `;
+
+
+        bookingsTableBody.appendChild(row);
+
+      });
+
+    }
+
+
+    /* -----------------------------------------------------
+       STATUS BADGE
+       ----------------------------------------------------- */
+
+    function statusBadge(status) {
+
+      const normalized =
+        String(status).toLowerCase();
+
+
+      let classes =
+        "bg-gray-100 text-gray-700";
+
+
+      if (normalized === "new") {
+        classes =
+          "bg-orange-100 text-orange-700";
+      }
+
+      else if (normalized === "pending") {
+        classes =
+          "bg-yellow-100 text-yellow-700";
+      }
+
+      else if (normalized === "confirmed") {
+        classes =
+          "bg-blue-100 text-blue-700";
+      }
+
+      else if (normalized.includes("cleaner")) {
+        classes =
+          "bg-purple-100 text-purple-700";
+      }
+
+      else if (normalized.includes("way")) {
+        classes =
+          "bg-indigo-100 text-indigo-700";
+      }
+
+      else if (normalized.includes("started")) {
+        classes =
+          "bg-cyan-100 text-cyan-700";
+      }
+
+      else if (normalized === "completed") {
+        classes =
+          "bg-green-100 text-green-700";
+      }
+
+      else if (normalized === "cancelled") {
+        classes =
+          "bg-red-100 text-red-700";
+      }
+
+
+      return `
+        <span class="
+          inline-flex
+          px-3
+          py-1
+          rounded-full
+          text-xs
+          font-bold
+          ${classes}
+        ">
+          ${escapeHtml(status)}
+        </span>
+      `;
+
+    }
+
+
+    /* -----------------------------------------------------
+       PRICE FORMAT
+       ----------------------------------------------------- */
+
+    function formatPrice(value) {
+
+      if (
+        value === null ||
+        value === undefined ||
+        value === ""
+      ) {
+        return "—";
+      }
+
+
+      const numeric =
+        Number(
+          String(value)
+            .replace(/[£,]/g, "")
+            .replace("estimated", "")
+            .trim()
+        );
+
+
+      if (Number.isNaN(numeric)) {
+        return String(value);
+      }
+
+
+      return "£" + numeric.toFixed(2);
+
+    }
+
+
+    /* -----------------------------------------------------
+       HTML ESCAPE
+       ----------------------------------------------------- */
+
+    function escapeHtml(value) {
+
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+    }
+
+
+    /* -----------------------------------------------------
+       SEARCH / FILTER
+       ----------------------------------------------------- */
+
+    searchBookings.addEventListener(
+      "input",
+      renderBookings
+    );
+
+
+    statusFilter.addEventListener(
+      "change",
+      renderBookings
+    );
+
+
+    refreshBookings.addEventListener(
+      "click",
+      loadBookings
+    );
+
+
+    /* -----------------------------------------------------
+       AUTH STATE
+       ----------------------------------------------------- */
+
+    supabaseClient.auth.onAuthStateChange(
+      async function(event, session) {
+
+        if (!session) {
+
+          showLoginScreen();
+
+        }
+
+      }
+    );
+
+
+    /* -----------------------------------------------------
+       INITIAL CHECK
+       ----------------------------------------------------- */
+
+    checkAdminAccess();
+
+  </script>
+
+</body>
+</html>

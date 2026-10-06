@@ -346,6 +346,10 @@
                 <th class="px-5 py-4 text-xs font-bold text-gray-500 uppercase">
                   Status
                 </th>
+                 
+                <th class="px-5 py-4 text-xs font-bold text-gray-500 uppercase">
+                  Actions
+                </th>
 
               </tr>
 
@@ -958,10 +962,41 @@
 
           <td class="px-5 py-4">
 
-            ${statusBadge(status)}
+  ${statusBadge(status)}
 
-          </td>
+</td>
 
+<td class="px-5 py-4">
+
+  ${
+    String(status).toLowerCase() === "pending"
+      ? `
+        <div class="flex flex-col gap-2">
+
+          <button
+            onclick="updateBookingStatus(${booking.id}, 'Confirmed')"
+            class="bg-green-600 hover:bg-green-700 text-white px-3 py-2 rounded-lg text-xs font-bold"
+          >
+            Confirm
+          </button>
+
+          <button
+            onclick="updateBookingStatus(${booking.id}, 'Cancelled')"
+            class="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-lg text-xs font-bold"
+          >
+            Cancel
+          </button>
+
+        </div>
+      `
+      : `
+        <span class="text-xs text-gray-400">
+          —
+        </span>
+      `
+  }
+
+</td>
         `;
 
 
@@ -1042,7 +1077,94 @@
       `;
 
     }
+    function statusBadge(status) {
 
+  // existing status badge code
+
+}
+/* -----------------------------------------------------
+   UPDATE BOOKING STATUS
+   ----------------------------------------------------- */
+
+async function updateBookingStatus(bookingId, newStatus) {
+
+  const actionText =
+    newStatus === "Confirmed"
+      ? "confirm this booking"
+      : "cancel this booking";
+
+
+  const confirmed =
+    window.confirm(
+      "Are you sure you want to " + actionText + "?"
+    );
+
+
+  if (!confirmed) {
+    return;
+  }
+
+
+  try {
+
+    const {
+      data,
+      error
+    } = await supabaseClient
+      .from("bookings")
+      .update({
+        status: newStatus,
+        admin_updated_at: new Date().toISOString()
+      })
+      .eq("id", bookingId)
+      .select()
+      .single();
+
+
+    if (error) {
+
+      console.error(
+        "BOOKING STATUS UPDATE ERROR:",
+        error
+      );
+
+      alert(
+        "Could not update booking status.\n\n" +
+        error.message
+      );
+
+      return;
+    }
+
+
+    console.log(
+      "Booking status updated:",
+      data
+    );
+
+
+    await loadBookings();
+
+
+    alert(
+      newStatus === "Confirmed"
+        ? "Booking confirmed successfully."
+        : "Booking cancelled successfully."
+    );
+
+  }
+
+  catch (error) {
+
+    console.error(error);
+
+    alert(
+      "Something went wrong while updating the booking."
+    );
+
+  }
+
+}
 
     /* -----------------------------------------------------
        PRICE FORMAT

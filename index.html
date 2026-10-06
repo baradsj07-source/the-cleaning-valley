@@ -3179,9 +3179,19 @@ booking_reference:
   booking.reference,
 
 status:
-  "New"
+  booking.status,
 
-    };
+start_time:
+  booking.startTime,
+ 
+end_time:
+  booking.endTime,
+
+travel_buffer_minutes:
+  60
+
+};
+  
 
 
     result =
@@ -3211,7 +3221,6 @@ status:
   return result.data;
 
 }
-
 
 /* =====================================================
    MAIN BOOKING SUBMISSION
@@ -3593,9 +3602,14 @@ async function submitBooking(event){
   catch(error){
 
     console.error(
-      "BOOKING SUBMISSION ERROR:",
-      error
-    );
+  "BOOKING SUBMISSION ERROR:",
+  error
+);
+
+alert(
+  "BOOKING ERROR:\n\n" +
+  JSON.stringify(error, null, 2)
+);
 
 
     let message =
